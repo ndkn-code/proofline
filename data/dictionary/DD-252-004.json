@@ -1,0 +1,7 @@
+{
+  "id": "DD-252-004",
+  "term": "Hold code MAN",
+  "module": "Accounts Payable",
+  "erp_release": "25.2",
+  "definition": "Manual hold. An AP user placed the invoice on hold by hand and must release it by hand."
+}

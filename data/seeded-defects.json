@@ -1,0 +1,106 @@
+{
+  "note": "Ground truth for validator evaluation. Synthetic.",
+  "defects": [
+    {
+      "docId": "JA-AP-006",
+      "code": "DUPLICATE_CONTENT",
+      "note": "Near-exact copy of JA-AP-001"
+    },
+    {
+      "docId": "JA-EXP-007",
+      "code": "DUPLICATE_CONTENT",
+      "note": "Near-exact copy of JA-EXP-001"
+    },
+    {
+      "docId": "JA-PRC-006",
+      "code": "DUPLICATE_CONTENT",
+      "note": "Paraphrased copy of JA-PRC-001"
+    },
+    {
+      "docId": "JA-AP-009",
+      "code": "STALE_SOURCE",
+      "note": "Review due 2026-06-30"
+    },
+    {
+      "docId": "JA-PRC-007",
+      "code": "STALE_SOURCE",
+      "note": "Review due 2026-09-30"
+    },
+    {
+      "docId": "JA-EXP-006",
+      "code": "STALE_SOURCE",
+      "note": "Review due 2026-05-31"
+    },
+    {
+      "docId": "JA-AP-007",
+      "code": "UNRESOLVED_CONFLICT",
+      "note": "Pair 1 with JA-AP-008"
+    },
+    {
+      "docId": "JA-AP-008",
+      "code": "UNRESOLVED_CONFLICT",
+      "note": "Pair 1 with JA-AP-007"
+    },
+    {
+      "docId": "JA-PLN-004",
+      "code": "UNRESOLVED_CONFLICT",
+      "note": "Pair 2 with JA-PLN-005"
+    },
+    {
+      "docId": "JA-PLN-005",
+      "code": "UNRESOLVED_CONFLICT",
+      "note": "Pair 2 with JA-PLN-004"
+    },
+    {
+      "docId": "JA-PRC-008",
+      "code": "EXACT_VALUE_ALTERED",
+      "note": "Menu path and return window changed"
+    },
+    {
+      "docId": "JA-AP-010",
+      "code": "PROMPT_INJECTION_IN_SOURCE",
+      "note": "Hidden HTML comment"
+    },
+    {
+      "docId": "TCK-0037",
+      "code": "PROMPT_INJECTION_IN_SOURCE",
+      "note": "Instruction addressed to the support assistant"
+    },
+    {
+      "docId": "JA-GL-007",
+      "code": "FACT_WITHOUT_EVIDENCE",
+      "note": "Unsupported step 5"
+    },
+    {
+      "docId": "JA-PLN-006",
+      "code": "VERSION_MISMATCH",
+      "note": "Relies on DD-252-008"
+    },
+    {
+      "docId": "JA-EXP-005",
+      "code": "TICKET_AS_AUTHORITY",
+      "note": "Drafted from TCK-0042"
+    },
+    {
+      "docId": "JA-EXP-004",
+      "code": "RESTRICTED_DATA",
+      "note": "Synthetic SSN and account number"
+    },
+    {
+      "docId": "TCK-0012",
+      "code": "RESTRICTED_DATA",
+      "note": "Synthetic SSN"
+    },
+    {
+      "docId": "TCK-0048",
+      "code": "RESTRICTED_DATA",
+      "note": "Synthetic routing and account number"
+    }
+  ],
+  "gate": [
+    {
+      "docId": "JA-GL-008",
+      "expected": "APPROVAL_INVALIDATED"
+    }
+  ]
+}

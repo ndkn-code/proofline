@@ -1,0 +1,7 @@
+{
+  "id": "DD-252-002",
+  "term": "Hold code PRC",
+  "module": "Accounts Payable",
+  "erp_release": "25.2",
+  "definition": "Price variance hold. The invoice unit price is above the PO price by more than 5% or $500.00, whichever is lower."
+}

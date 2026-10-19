@@ -1,0 +1,12 @@
+{
+  "id": "DD-252-009",
+  "term": "Budget version type",
+  "module": "Planning",
+  "erp_release": "25.2",
+  "definition": "Lifecycle state of a budget version in a planning cycle.",
+  "values": [
+    "Working",
+    "Submitted",
+    "Approved"
+  ]
+}

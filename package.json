@@ -1,0 +1,39 @@
+{
+  "name": "proofline",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A public, synthetic replica of an evidence-grounded finance ERP support agent. Fully offline and deterministic.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "seed": "tsx scripts/seed-corpus.ts",
+    "ingest": "tsx scripts/ingest.ts",
+    "validate": "tsx scripts/validate.ts",
+    "eval": "tsx scripts/run-eval.ts",
+    "ask": "tsx scripts/ask.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "dev": "npm run ingest && vite --port 3010",
+    "build": "npm run ingest && vite build",
+    "preview": "vite preview --port 3010"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
+}

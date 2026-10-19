@@ -1,0 +1,13 @@
+{
+  "id": "DD-261-005",
+  "term": "Period status",
+  "module": "General Ledger",
+  "erp_release": "26.1",
+  "definition": "Controls whether journals can post to an accounting period.",
+  "values": [
+    "Open",
+    "Closed",
+    "Future Enterable",
+    "Permanently Closed"
+  ]
+}

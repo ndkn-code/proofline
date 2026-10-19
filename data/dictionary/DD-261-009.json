@@ -1,0 +1,14 @@
+{
+  "id": "DD-261-009",
+  "term": "Expense type code",
+  "module": "Expenses",
+  "erp_release": "26.1",
+  "definition": "Code that classifies an expense item and drives its receipt rules.",
+  "values": [
+    "MEAL",
+    "LODG",
+    "AIR",
+    "MILE",
+    "OTHR"
+  ]
+}

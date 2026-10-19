@@ -1,0 +1,7 @@
+{
+  "id": "DD-261-003",
+  "term": "Hold code RCV",
+  "module": "Accounts Payable",
+  "erp_release": "26.1",
+  "definition": "Receipt required hold. A goods line is matched to a PO line that has no receipt."
+}

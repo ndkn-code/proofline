@@ -1,0 +1,12 @@
+{
+  "id": "DD-261-006",
+  "term": "Match level",
+  "module": "Accounts Payable",
+  "erp_release": "26.1",
+  "definition": "How many documents an invoice line is matched against. Goods lines default to three-way match.",
+  "values": [
+    "Two-way",
+    "Three-way",
+    "Four-way"
+  ]
+}

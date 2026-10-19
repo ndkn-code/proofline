@@ -1,0 +1,7 @@
+{
+  "id": "DD-261-004",
+  "term": "Hold code BNK",
+  "module": "Accounts Payable",
+  "erp_release": "26.1",
+  "definition": "Bank change hold. Payments to a supplier site pause for 3 business days after a remit-to bank change is approved."
+}

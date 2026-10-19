@@ -1,0 +1,7 @@
+{
+  "id": "DD-252-008",
+  "term": "Planning dimension map",
+  "module": "Planning",
+  "erp_release": "25.2",
+  "definition": "Maps the planning Department dimension to GL segment 3, Cost Center."
+}

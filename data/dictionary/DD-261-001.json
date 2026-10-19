@@ -1,0 +1,7 @@
+{
+  "id": "DD-261-001",
+  "term": "Hold code QTY",
+  "module": "Accounts Payable",
+  "erp_release": "26.1",
+  "definition": "Quantity variance hold. The invoice quantity is greater than the received quantity beyond tolerance."
+}

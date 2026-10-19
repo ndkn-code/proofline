@@ -1,0 +1,13 @@
+{
+  "id": "DD-252-010",
+  "term": "Journal category",
+  "module": "General Ledger",
+  "erp_release": "25.2",
+  "definition": "Classifies a journal for approval routing and reporting.",
+  "values": [
+    "Manual",
+    "Intercompany",
+    "Recurring",
+    "Reversal"
+  ]
+}

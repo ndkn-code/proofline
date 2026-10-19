@@ -1,0 +1,15 @@
+{
+  "id": "DD-252-007",
+  "term": "Requisition status",
+  "module": "Procurement",
+  "erp_release": "25.2",
+  "definition": "Lifecycle state of a purchase requisition.",
+  "values": [
+    "Incomplete",
+    "Pending Approval",
+    "Approved",
+    "Rejected",
+    "Canceled",
+    "Returned"
+  ]
+}
