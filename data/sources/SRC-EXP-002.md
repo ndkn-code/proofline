@@ -10,7 +10,7 @@ captured_on: 2026-08-06
 
 ## Purpose
 
-Use this job aid when you lost a receipt for a business expense.
+Use this SOP when you lost a receipt for a business expense.
 
 ## Steps
 

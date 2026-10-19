@@ -6,7 +6,7 @@ export const STOPWORDS = new Set(
     "me my of on or our so than that the their them then there these they this to up was we were what when " +
     "where which who why will with would you your yours should shall may might must not no yes about after " +
     "before over under again also any all each per via out off just only own same such too very s t step " +
-    "steps need want get go use using please tell show way ledgerline"
+    "steps need want get go use using please tell show way ledgerline sop sops"
   ).split(/\s+/),
 );
 

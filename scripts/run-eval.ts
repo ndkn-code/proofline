@@ -1,6 +1,6 @@
-// Run the synthetic eval set and write eval/report.json and eval/REPORT.md.
+// Run the synthetic eval set against the index built from the SOP PDFs, and write eval/report.json and eval/REPORT.md.
 // The numbers are whatever the system produces. Misses are listed, not hidden.
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { createAnswerer } from "../src/core/answer";
 import { MIN_COVERAGE, MIN_SCORE } from "../src/core/config";
@@ -27,7 +27,7 @@ const seeded = JSON.parse(readFileSync(join(DATA, "seeded-defects.json"), "utf8"
 };
 
 const tBuild = performance.now();
-const { index } = loadAndIngest();
+const { index } = await loadAndIngest();
 const answerer = createAnswerer(index);
 const buildMs = performance.now() - tBuild;
 
@@ -49,7 +49,7 @@ function outputText(r: AnswerResult): string {
   return [answerText(r), r.refusal?.explanation ?? "", ...r.relatedTickets.map((t) => `${t.subject} ${t.resolution}`)].join("\n");
 }
 function eligibleCitation(docId: string, release: string, idx: CorpusIndex): boolean {
-  const a = idx.articles.find((x) => x.id === docId);
+  const a = idx.sops.find((x) => x.id === docId);
   if (a) return a.status === "published" && a.erp_release === release;
   const d = idx.dictionary.find((x) => x.id === docId);
   return !!d && d.erp_release === release;
@@ -162,7 +162,7 @@ const perValidator = FINDING_CODES.map((code) => {
   };
 });
 const gateResults = seeded.gate.map((g) => {
-  const a = index.articles.find((x) => x.id === g.docId);
+  const a = index.sops.find((x) => x.id === g.docId);
   return { docId: g.docId, expected: g.expected, detected: !!a?.gate.approvalInvalidatedFrom, status: a?.status ?? "missing" };
 });
 const totalSeeded = seeded.defects.length;
@@ -173,7 +173,7 @@ const categories = [...new Set(rows.map((r) => r.category))].map((c) => {
   return { category: c, n: rs.length, correct: rs.filter((r) => r.correct).length, rate: pct(rs.filter((r) => r.correct).length, rs.length) };
 });
 
-const statusCounts = index.articles.reduce<Record<string, number>>((acc, a) => ((acc[a.status] = (acc[a.status] ?? 0) + 1), acc), {});
+const statusCounts = index.sops.reduce<Record<string, number>>((acc, a) => ((acc[a.status] = (acc[a.status] ?? 0) + 1), acc), {});
 
 const report = {
   label: `synthetic eval set, n = ${rows.length}`,
@@ -181,7 +181,8 @@ const report = {
   as_of: index.as_of,
   thresholds: { min_score: MIN_SCORE, min_coverage: MIN_COVERAGE },
   corpus: {
-    articles: index.articles.length,
+    sops: index.sops.length,
+    sop_pdfs: { files: index.sops.length, pages: index.sops.reduce((s, a) => s + a.pages, 0), bytes: index.sops.reduce((s, a) => s + statSync(join(PROJECT_ROOT, a.path)).size, 0) },
     status: statusCounts,
     dictionary_entries: index.dictionary.length,
     tickets: index.tickets.length,
@@ -218,6 +219,8 @@ const line = (name: string, x: { value: number; num: number; den: number }) => `
 const md: string[] = [];
 md.push("# Proofline eval report", "");
 md.push(`Label: **${report.label}**. Corpus and questions are fully synthetic (Halden Supply Co. and Ledgerline are fictional). Evaluation date fixed at ${report.as_of}.`, "");
+const pdfs = report.corpus.sop_pdfs;
+md.push(`Evidence: ${pdfs.files} SOP PDFs (${pdfs.pages} pages, ${(pdfs.bytes / 1024).toFixed(0)} KB) in data/pdf, read with pdf.js and hashed with SHA-256 per PDF version, plus ${report.corpus.dictionary_entries} version-scoped data dictionary entries. Past tickets (${report.corpus.tickets}) are context only. Citations point at an SOP id, PDF page and visual line, for example "SOP-AP-004 \u00b7 p.2 \u00b7 L2".`, "");
 md.push(`Thresholds: BM25 score >= ${MIN_SCORE} and IDF-weighted term coverage >= ${MIN_COVERAGE * 100}%. ${report.counts.should_answer} items should be answered and ${report.counts.should_refuse} should be refused.`, "");
 md.push("## Headline metrics", "", "| Metric | Value | Count |", "| --- | --- | --- |");
 md.push(line("Grounded-answer rate", m.grounded_answer_rate));
@@ -256,11 +259,12 @@ else {
 md.push("");
 md.push("## Notes on method", "");
 md.push("- Questions were written before running the system and were not edited afterwards to make them pass.");
-md.push("- Retrieval is lexical (BM25). Paraphrases that share few words with the job aid are expected to fail; they are in the set on purpose.");
-md.push("- \"Findings on unseeded docs\" are listed rather than hidden. The EXACT_VALUE_ALTERED finding on JA-GL-008 is a side effect of its planted post-approval edit (\"1 business day\" became \"2 business days\"), so it is a true finding the seed list did not anticipate.");
+md.push("- Retrieval is lexical (BM25). Paraphrases that share few words with the SOP are expected to fail; they are in the set on purpose.");
+md.push("- \"Findings on unseeded docs\" are listed rather than hidden. The EXACT_VALUE_ALTERED finding on SOP-GL-008 is a side effect of its planted post-approval edit (\"1 business day\" became \"2 business days\"), so it is a true finding the seed list did not anticipate.");
 md.push("- A refusal for the wrong reason still counts as a correct refusal; reason accuracy is reported separately.");
 md.push("- One change was made after the first run: dictionary entries were not indexing their \"Values\" label, although answers quote it. First-run headline numbers before that fix: grounded-answer rate 72.2% (39/54), citation precision 95.1%, citation recall 70.9%, exact-value accuracy 79.2%, correct-refusal rate 97.4%, false-refusal rate 24.1%, unsafe-answer rate 2.6%. No thresholds or questions were changed.");
-md.push("- Latency is measured in-process on a laptop with a 60-document index. It says nothing about a networked deployment.");
+md.push("- SOPs are ingested from the rendered PDFs, not from their Markdown sources. A test checks that every PDF parses back to the same metadata, sections and steps as its source, so moving from Markdown ingest to PDF ingest left every eval row with the same outcome; the headline numbers did not change.");
+md.push(`- Latency is measured in-process on a laptop with a ${index.sops.length + index.dictionary.length}-document index (${index.sops.length} SOPs, ${index.dictionary.length} dictionary entries). It says nothing about a networked deployment. Index build time (${m.latency_ms.index_build_ms} ms) includes PDF text extraction.`);
 md.push("");
 writeFileSync(join(PROJECT_ROOT, "eval", "REPORT.md"), md.join("\n"));
 

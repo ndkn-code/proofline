@@ -10,7 +10,7 @@ captured_on: 2026-09-04
 
 ## Purpose
 
-Use this job aid to compare actual results with the approved budget.
+Use this SOP to compare actual results with the approved budget.
 
 ## Steps
 

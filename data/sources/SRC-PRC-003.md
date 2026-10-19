@@ -10,7 +10,7 @@ captured_on: 2026-07-30
 
 ## Purpose
 
-Use this job aid to create a change order for a purchase order that is already approved.
+Use this SOP to create a change order for a purchase order that is already approved.
 
 ## Steps
 

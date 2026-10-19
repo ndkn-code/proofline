@@ -10,7 +10,7 @@ captured_on: 2026-09-17
 
 ## Purpose
 
-Use this job aid to return received goods to the supplier.
+Use this SOP to return received goods to the supplier.
 
 ## Steps
 

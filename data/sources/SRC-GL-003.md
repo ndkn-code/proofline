@@ -10,7 +10,7 @@ captured_on: 2026-07-14
 
 ## Purpose
 
-Use this job aid to create a recurring journal template for entries that repeat every period.
+Use this SOP to create a recurring journal template for entries that repeat every period.
 
 ## Steps
 

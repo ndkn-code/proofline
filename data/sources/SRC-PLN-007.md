@@ -10,7 +10,7 @@ captured_on: 2026-10-01
 
 ## Purpose
 
-Draft job aid for creating a 12 month rolling forecast version.
+Draft SOP for creating a 12 month rolling forecast version.
 
 ## Steps
 

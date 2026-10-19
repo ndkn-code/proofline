@@ -10,7 +10,7 @@ captured_on: 2026-08-12
 
 ## Purpose
 
-Use this job aid to turn approved requisition lines into a purchase order.
+Use this SOP to turn approved requisition lines into a purchase order.
 
 ## Steps
 

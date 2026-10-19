@@ -10,7 +10,7 @@ captured_on: 2026-09-14
 
 ## Purpose
 
-Use this job aid to account for every charge on your corporate card statement.
+Use this SOP to account for every charge on your corporate card statement.
 
 ## Steps
 

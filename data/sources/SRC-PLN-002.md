@@ -10,7 +10,7 @@ captured_on: 2026-08-20
 
 ## Purpose
 
-Use this job aid to submit your department budget version for review.
+Use this SOP to submit your department budget version for review.
 
 ## Steps
 

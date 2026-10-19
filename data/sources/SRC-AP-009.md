@@ -10,7 +10,7 @@ captured_on: 2025-12-30
 
 ## Purpose
 
-Use this job aid to record a supplier credit memo and apply it to an open invoice.
+Use this SOP to record a supplier credit memo and apply it to an open invoice.
 
 ## Steps
 

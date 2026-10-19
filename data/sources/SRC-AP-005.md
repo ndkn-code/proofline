@@ -10,7 +10,7 @@ captured_on: 2026-09-15
 
 ## Purpose
 
-Use this job aid to change the bank account a supplier is paid to.
+Use this SOP to change the bank account a supplier is paid to.
 
 ## Before you start
 

@@ -1,5 +1,6 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { REFUSAL_TEXT } from "../../../src/core/refusals";
+import { formatLocator } from "../../../src/core/sop-pdf";
 import type { AnswerResult, Citation } from "../../../src/core/types";
 import { answerer, index } from "../data";
 import { Card, Code, Hash, SectionTitle, StatusPill } from "./ui";
@@ -122,7 +123,7 @@ function AnswerBody({ result, active, onCite }: { result: AnswerResult; active: 
           <div className="text-lg font-semibold tracking-tight">{first.title}</div>
           <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-mute">
             <Code>{first.docId}</Code>
-            <span>{first.lane === "dictionary" ? "Data dictionary entry" : "Reviewed job aid"}</span>
+            <span>{first.lane === "dictionary" ? "Data dictionary entry" : "Reviewed SOP (PDF)"}</span>
             <span aria-hidden>·</span>
             <span>release {first.erp_release}</span>
           </div>
@@ -168,7 +169,7 @@ function AnswerBody({ result, active, onCite }: { result: AnswerResult; active: 
           </ul>
         </div>
       ) : null}
-      <p className="mt-6 text-xs text-mute">Every line above is quoted verbatim from the cited passage. Nothing is paraphrased or generated.</p>
+      <p className="mt-6 text-xs text-mute">Every line above is quoted verbatim from text extracted from the cited PDF page and line. Nothing is paraphrased or generated.</p>
     </Card>
   );
 }
@@ -188,33 +189,42 @@ function RefusalBody({ result }: { result: AnswerResult }) {
 
 function CitationPanel({ citation, total }: { citation: Citation | null; total: number }) {
   if (!citation) return null;
-  const art = index.articles.find((a) => a.id === citation.docId);
+  const art = index.sops.find((a) => a.id === citation.docId);
   return (
     <Card className="p-5">
       <SectionTitle aside={`${citation.n} of ${total}`}>Citation</SectionTitle>
       <div className="text-sm font-medium">{citation.title}</div>
       <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-mute">
-        <Code>{citation.docId}</Code>
-        <span>{citation.locator.section}</span>
+        <span className="font-mono">{formatLocator(citation.locator)}</span>
         <span aria-hidden>·</span>
-        <span className="font-mono">
-          L{citation.locator.lineStart}
-          {citation.locator.lineEnd !== citation.locator.lineStart ? `-L${citation.locator.lineEnd}` : ""}
-        </span>
+        <span>{citation.locator.section}</span>
+        {art ? (
+          <>
+            <span aria-hidden>·</span>
+            <a className="underline decoration-dotted hover:text-ink" href={`${import.meta.env.BASE_URL}${art.id}.pdf#page=${citation.locator.page}`} target="_blank" rel="noreferrer">
+              open PDF
+            </a>
+          </>
+        ) : null}
       </div>
       <blockquote className="mt-4 border-l-2 border-ink bg-wash px-4 py-3 text-sm leading-relaxed">{citation.quote}</blockquote>
       {art ? (
         <div className="mt-4 text-xs text-mute">
-          <div className="mb-1 font-medium text-ink-2">Passage in context</div>
+          <div className="mb-1 font-medium text-ink-2">
+            Page {citation.locator.page} of {art.pages}, as extracted from the PDF
+          </div>
           <div className="max-h-56 overflow-auto rounded border border-line">
             {art.sections
-              .flatMap((s) => s.lines.filter((l) => !l.text.startsWith("<!--")).map((l) => ({ ...l, section: s.heading })))
-              .map((l) => (
-                <div key={l.line} className={`flex gap-2 px-2 py-0.5 font-mono text-[11px] ${l.line === citation.locator.lineStart ? "bg-ink text-white" : "text-ink-2"}`}>
-                  <span className={`w-7 shrink-0 text-right ${l.line === citation.locator.lineStart ? "text-white" : "text-mute"}`}>{l.line}</span>
-                  <span className="truncate">{l.text}</span>
-                </div>
-              ))}
+              .flatMap((s) => s.lines.filter((l) => !l.hidden && l.page === citation.locator.page))
+              .map((l) => {
+                const on = l.line === citation.locator.lineStart;
+                return (
+                  <div key={l.line} className={`flex gap-2 px-2 py-0.5 font-mono text-[11px] ${on ? "bg-ink text-white" : "text-ink-2"}`}>
+                    <span className={`w-9 shrink-0 text-right ${on ? "text-white" : "text-mute"}`}>L{l.line}</span>
+                    <span className="truncate">{l.step ? `${l.step}. ` : ""}{l.text}</span>
+                  </div>
+                );
+              })}
           </div>
         </div>
       ) : null}
@@ -226,7 +236,7 @@ function CitationPanel({ citation, total }: { citation: Citation | null; total: 
             <Hash value={citation.sourceHash} />
           </li>
           <li className="flex justify-between gap-2">
-            <span className="text-mute">Approved draft</span>
+            <span className="text-mute">Approved PDF version (SHA-256)</span>
             <Hash value={citation.draftHash} />
           </li>
           <li className="flex justify-between gap-2">
@@ -247,7 +257,7 @@ function CitationPanel({ citation, total }: { citation: Citation | null; total: 
 
 function WhyPanel({ result }: { result: AnswerResult }) {
   const r = result.refusal!;
-  const blocking = r.blockingDocId ? (index.articles.find((a) => a.id === r.blockingDocId) ?? null) : null;
+  const blocking = r.blockingDocId ? (index.sops.find((a) => a.id === r.blockingDocId) ?? null) : null;
   const dict = r.blockingDocId ? (index.dictionary.find((d) => d.id === r.blockingDocId) ?? null) : null;
   return (
     <Card className="p-5">
@@ -281,7 +291,7 @@ function WhyPanel({ result }: { result: AnswerResult }) {
               Locators:{" "}
               {r.blockingFindings
                 .filter((f) => f.locator)
-                .map((f) => `${f.code} at ${f.locator!.section} L${f.locator!.lineStart}`)
+                .map((f) => `${f.code} at ${formatLocator(f.locator!)}`)
                 .join("; ")}
             </div>
           ) : null}

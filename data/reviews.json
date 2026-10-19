@@ -1,236 +1,236 @@
 {
   "approvals": [
     {
-      "article_id": "JA-GL-001",
-      "draft_hash": "48dc1144c17177193cabe9c6171ee33a55c146e83d9f4177ebaed3d24e7a0032",
+      "doc_id": "SOP-GL-001",
+      "draft_hash": "c8bff92212c367078aa15bbe796363be82c84f6ace53032ee8d6379227d2e844",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-08-03"
     },
     {
-      "article_id": "JA-GL-002",
-      "draft_hash": "af25824d02aa809b13198d625ac17dbe3be6343fafe06fbf56c2144e852fae6e",
+      "doc_id": "SOP-GL-002",
+      "draft_hash": "4e080987e9fbce6b1b58ef0e01fd9fc9c6657df2f29703dac12842332ceaad9e",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-08-03"
     },
     {
-      "article_id": "JA-GL-003",
-      "draft_hash": "3b374a902a17523ae3f590c8e1f0eb96ecf4b5cf1eb10e3683f21e5152be14bc",
+      "doc_id": "SOP-GL-003",
+      "draft_hash": "f4ef008942edfddebbf5a0c0c383a28bb0e85651b70d0b55b5bf9de3bc0729d5",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-07-14"
     },
     {
-      "article_id": "JA-GL-004",
-      "draft_hash": "7ca834d1524bd1b92d67369e0f705815a6f9324663f65ca245fc8a2a980013b0",
+      "doc_id": "SOP-GL-004",
+      "draft_hash": "7d4b266f181e3b9a7ff3c3312c37e85a03c2c62c2f5b3982ee922a1264497c90",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-09-08"
     },
     {
-      "article_id": "JA-GL-005",
-      "draft_hash": "08c6412c5e3ef9cf44300fde9f7aff7986614922ecbb7bea5209b0b3b85b9463",
+      "doc_id": "SOP-GL-005",
+      "draft_hash": "c2954f5e194f80d9951a84133b092cb486b1cb4a7160bd22d18692997bf152f7",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-06-22"
     },
     {
-      "article_id": "JA-GL-006",
-      "draft_hash": "fe1fb32bf0a471e25e4a39b2851ce407df7288232ccd1c6924ca129c57c492bb",
+      "doc_id": "SOP-GL-006",
+      "draft_hash": "f6da78df9a46fb605af1e7428abd4534b85581f0fe0695224e9498315239228b",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-09-01"
     },
     {
-      "article_id": "JA-GL-007",
-      "draft_hash": "31c8083b00fefa9c12064534839d95762fe2167f1b1e9b9488f3b0d366e626db",
+      "doc_id": "SOP-GL-007",
+      "draft_hash": "fc9d27af78ea58102617392f9e0347f21fb3829b7f4e3489e7cdd3a0b5eec40c",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-08-19"
     },
     {
-      "article_id": "JA-GL-008",
-      "draft_hash": "abe3e8444985c2f3e0f3ade7cca3a5202366fda9b828e309beba08c58f19d8f4",
+      "doc_id": "SOP-GL-008",
+      "draft_hash": "697b38e4126af3055f4a36fbfd0e134270776d44f842f5bb750a1a068fb9464a",
       "reviewer_role": "GL Accounting Lead",
       "approved_on": "2026-09-10"
     },
     {
-      "article_id": "JA-AP-001",
-      "draft_hash": "501087e6b029fe1c27426875d8b5e279d8f5e7fe9801f1943de641a2619b3b5b",
+      "doc_id": "SOP-AP-001",
+      "draft_hash": "a037bcf19b6bf47f00f0f7e79e9e86c7961c8a337e202520493ef6e386e17fce",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-08-04"
     },
     {
-      "article_id": "JA-AP-002",
-      "draft_hash": "51ff8159ae3e3ffca9a91ab06a42464793fe21afd0e3b9c38da9d45948c5d063",
+      "doc_id": "SOP-AP-002",
+      "draft_hash": "4fbb02d95b6e4926ddd6e87803f1649e81d2966b0d8c9f06743bbfa1b31666c6",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-08-04"
     },
     {
-      "article_id": "JA-AP-003",
-      "draft_hash": "a5882e75e7d6b663fc3b74ca976e4b1fcfcc110c02ee94fde0dc03cb51ad4914",
+      "doc_id": "SOP-AP-003",
+      "draft_hash": "8f12f118814032b93c5ea9aff7173b70e80f5ba5c2488e4b23cfb4ac5acfbdf4",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-09-02"
     },
     {
-      "article_id": "JA-AP-004",
-      "draft_hash": "952452f6a82038bd9f9ce96e7e4bff8c0d1eb9e2651762e88516c40e332db30b",
+      "doc_id": "SOP-AP-004",
+      "draft_hash": "3c4dd16823411cd14cd9436b9e04e7aeef54ad6fbb85dc9e5c7f8db06090341a",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-07-28"
     },
     {
-      "article_id": "JA-AP-005",
-      "draft_hash": "00e1016e484a07563309e8b6e3dc3d8166a6c2466094c95071e024f2eb226c4c",
+      "doc_id": "SOP-AP-005",
+      "draft_hash": "80961a7fb8259f971d5a3ac64a1fcc4a893d1c998651ca7b9d5c02f70aab685c",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-09-15"
     },
     {
-      "article_id": "JA-AP-006",
-      "draft_hash": "77594b0200f295d04ff35f4f2f9c33ad652a4cbed9632f68a504469cfe046432",
+      "doc_id": "SOP-AP-006",
+      "draft_hash": "8eff5c51b0a9704ad4b4307e8a4ca66ef57ac368e08da9b129a75c03398f97a7",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-09-21"
     },
     {
-      "article_id": "JA-AP-007",
-      "draft_hash": "d25967b5d031bc38218a31a18998ea4ab1eaed87c0428dec3f3e7d2ddc29fcad",
+      "doc_id": "SOP-AP-007",
+      "draft_hash": "e37f02bb08a76db68e278c0ec6bc046894f7ee1c111ea0a9306f496e6320c45e",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-08-11"
     },
     {
-      "article_id": "JA-AP-008",
-      "draft_hash": "845772728392a64bd3aa3e255b886f59aae8e45dbc92ede65663de6040587c64",
+      "doc_id": "SOP-AP-008",
+      "draft_hash": "895b201e6ae108265a27b33d68e9d816f3f4da264982253d8c42dbfa483f79ce",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-09-09"
     },
     {
-      "article_id": "JA-AP-009",
-      "draft_hash": "b325f7b11d671fb71bc19f41a0f7a2862cbc56cc0c26a6dee6ddd17553fcd441",
+      "doc_id": "SOP-AP-009",
+      "draft_hash": "2cb283e4d1ec574e88f41c46c361709562ab58129df30a4bcc05932fbe6b3ccd",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2025-12-30"
     },
     {
-      "article_id": "JA-AP-010",
-      "draft_hash": "66952826cacecff6efc178148813e63e2be58a2618a88369efe4c507d7d76ea2",
+      "doc_id": "SOP-AP-010",
+      "draft_hash": "cdc348651b1e01ea26b7fe480b3688f25df574db90888aaa43dbcc3abd40b164",
       "reviewer_role": "AP Operations Supervisor",
       "approved_on": "2026-08-25"
     },
     {
-      "article_id": "JA-PRC-001",
-      "draft_hash": "2cee9adec36a8b0947b1866ded022617c0d0d09372a56b8bfe1aafeb4e33b96f",
+      "doc_id": "SOP-PRC-001",
+      "draft_hash": "1c9e78369694f34621675c777cd757d4a414a3961d43f2eeed920168fde87188",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-08-12"
     },
     {
-      "article_id": "JA-PRC-002",
-      "draft_hash": "ad7bb15622f7b9e1d13aae4f8dbab38c4c15f6d991bec21d41183b58fa657dfb",
+      "doc_id": "SOP-PRC-002",
+      "draft_hash": "5d37e1bbbbdecd5ab4591bc6ced52f5e2c3142bb400c2d27fa6a88e303c4006c",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-08-12"
     },
     {
-      "article_id": "JA-PRC-003",
-      "draft_hash": "213c1026a6c574a1f7235086d18b5a3a3dcdc281237d4c0845cc4a0b91356dad",
+      "doc_id": "SOP-PRC-003",
+      "draft_hash": "aeb63d42285803aed0df628eb64f218289909702afde6c49ccbb3e08c44e8cd5",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-07-30"
     },
     {
-      "article_id": "JA-PRC-004",
-      "draft_hash": "6a884d2ba50c6c01035bb7d2c6d0fd45475071ff7d8cc72327935b275b1d90c5",
+      "doc_id": "SOP-PRC-004",
+      "draft_hash": "6502f3344792df5923373e303b6bb3dfe83979e854b5d23258e9f728cfd9eab9",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-09-03"
     },
     {
-      "article_id": "JA-PRC-005",
-      "draft_hash": "6d9646f5fbbf8f364d67312088d2318379dc7a9a13a9199513c386172a998b22",
+      "doc_id": "SOP-PRC-005",
+      "draft_hash": "f6f6c312a3eea08b97b803dad9f0cfc14a5cf9bf05d2106464da02bbafcc4b23",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-08-26"
     },
     {
-      "article_id": "JA-PRC-006",
-      "draft_hash": "d411a02aeb74ebed7ab441e4df0437e4799d32b8907373059ec1974f87b68199",
+      "doc_id": "SOP-PRC-006",
+      "draft_hash": "9b9e203ff59ff14090085bcaded9c54789e983a0405716b3d357b86a61b6b98a",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-09-24"
     },
     {
-      "article_id": "JA-PRC-007",
-      "draft_hash": "551001df714063cd7461ee9e88bdd37c907336a8d74c43740482795c55b09c5a",
+      "doc_id": "SOP-PRC-007",
+      "draft_hash": "0d4254717a1457cf20bf77573fe9cd600b0c3c492e39234cd144586ef2cf72f0",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-03-31"
     },
     {
-      "article_id": "JA-PRC-008",
-      "draft_hash": "8961fe6df090149a6ac4623c6c163a416e00eeac23baecb206f95a8f3d835a6c",
+      "doc_id": "SOP-PRC-008",
+      "draft_hash": "d233900b668c1979028cd42847db0705915bf1157a5d7d260b301661f26d6425",
       "reviewer_role": "Procurement Operations Manager",
       "approved_on": "2026-09-17"
     },
     {
-      "article_id": "JA-PLN-001",
-      "draft_hash": "142d989d0bd9f88936295b20d465b1caeaed02ae84c6677f6a21efa40bc49036",
+      "doc_id": "SOP-PLN-001",
+      "draft_hash": "a4bef2829d249c9389847e837e840aab04e2059a78745634c7cd9b0729ba5642",
       "reviewer_role": "FP&A Systems Analyst",
       "approved_on": "2026-08-20"
     },
     {
-      "article_id": "JA-PLN-002",
-      "draft_hash": "4b4ad040a080b3900c7b69da2c7166d1baa976060d5732a3bf756a2005ed88c5",
+      "doc_id": "SOP-PLN-002",
+      "draft_hash": "a759a408f6e8a46299cfb09a5c16e522bcf3f69416a969360172e0f49d3b0341",
       "reviewer_role": "FP&A Systems Analyst",
       "approved_on": "2026-08-20"
     },
     {
-      "article_id": "JA-PLN-003",
-      "draft_hash": "ef14aaed30e28b12704e867aa13f60860fd948bdaded60d6e73f81ce2265eb0a",
+      "doc_id": "SOP-PLN-003",
+      "draft_hash": "1395210e92b0d9d4b95131db0f0dacb5e77e0f27d659819c925481dc06d9b639",
       "reviewer_role": "FP&A Systems Analyst",
       "approved_on": "2026-09-04"
     },
     {
-      "article_id": "JA-PLN-004",
-      "draft_hash": "e42a72b6b1afcf9894a288582f2c75955909dd20342fc72e04a4fb962ac435f8",
+      "doc_id": "SOP-PLN-004",
+      "draft_hash": "baeb28ce9fd16ae5d2aab1a60bc32bfcca43c40dc7f93e40d3834e647466525b",
       "reviewer_role": "FP&A Systems Analyst",
       "approved_on": "2026-08-27"
     },
     {
-      "article_id": "JA-PLN-005",
-      "draft_hash": "ff681200cc2a4c64e9d3da475b1748b79ced7ebb266c8e66c95792aa696f8a50",
+      "doc_id": "SOP-PLN-005",
+      "draft_hash": "5c66e407d060e5bef2a535921a08cef66962f3910950a676010f4c25bc2e21ee",
       "reviewer_role": "FP&A Systems Analyst",
       "approved_on": "2026-09-11"
     },
     {
-      "article_id": "JA-PLN-006",
-      "draft_hash": "e2ed0273abd98687472019291946250f0d1e2a7c2872b757069078462f1b3456",
+      "doc_id": "SOP-PLN-006",
+      "draft_hash": "72444f96467fa021347d35969f760001bdd41fa45f71aa325a44155e22c5e2ae",
       "reviewer_role": "FP&A Systems Analyst",
       "approved_on": "2026-09-18"
     },
     {
-      "article_id": "JA-EXP-001",
-      "draft_hash": "721de95c227a6bd3cee9daf0da427e0b1d2c2b9db92649d87cee931eec27304b",
+      "doc_id": "SOP-EXP-001",
+      "draft_hash": "4d5a4bbc29474fa6d62cda2e71dde79c9cd153ac563a7d86a51430c1a036199f",
       "reviewer_role": "Travel and Expense Coordinator",
       "approved_on": "2026-08-06"
     },
     {
-      "article_id": "JA-EXP-002",
-      "draft_hash": "aae5abfe67ef6103d408f0528acd88ca97f9e7d779f347ce77ba51a7191aa266",
+      "doc_id": "SOP-EXP-002",
+      "draft_hash": "dacc6db27cbed7dbc66445024404414f77deed64a5d8a3b86f37437b8294256f",
       "reviewer_role": "Travel and Expense Coordinator",
       "approved_on": "2026-08-06"
     },
     {
-      "article_id": "JA-EXP-003",
-      "draft_hash": "2e086fe6e1f3e3c405e87104f6e6efe81997e8faff59d90963e910b7d81d93cd",
+      "doc_id": "SOP-EXP-003",
+      "draft_hash": "3b7e5238e5695cad065bdf1d3314bc16250eae6135a54d758c747a5e65cf9844",
       "reviewer_role": "Travel and Expense Coordinator",
       "approved_on": "2026-09-14"
     },
     {
-      "article_id": "JA-EXP-004",
-      "draft_hash": "34c51ed3565816487b61c1228028eaaa4df9a820d0e18f9642ef73e89fdf1269",
+      "doc_id": "SOP-EXP-004",
+      "draft_hash": "4247fa1c991fa6962393db5020f365c2f69c9cff3569effc31bfa3242bc6e0e6",
       "reviewer_role": "Travel and Expense Coordinator",
       "approved_on": "2026-08-29"
     },
     {
-      "article_id": "JA-EXP-005",
-      "draft_hash": "9640b80af03863914b144388831c0fded60110310573701916f7a09f95e24fa1",
+      "doc_id": "SOP-EXP-005",
+      "draft_hash": "1c3a586a01d230b93b1c2e599d7cca1f5d1624f9a093252433934cef7ed94926",
       "reviewer_role": "Travel and Expense Coordinator",
       "approved_on": "2026-09-02"
     },
     {
-      "article_id": "JA-EXP-006",
-      "draft_hash": "a3d9fdc3c50bfea8dde97d155e341d758a12bf13d33655d78cc490ead340e32c",
+      "doc_id": "SOP-EXP-006",
+      "draft_hash": "48f0089178866b70aa64ed70438e00405f736fac36d8c15eb7fd72f717a93a49",
       "reviewer_role": "Travel and Expense Coordinator",
       "approved_on": "2025-11-30"
     },
     {
-      "article_id": "JA-EXP-007",
-      "draft_hash": "ceb0dad944b4207a13015a081cf549e9e040f500baf39e50cffcffd278fa8ebb",
+      "doc_id": "SOP-EXP-007",
+      "draft_hash": "14353d4ebf1f3c1fb2d10a7595ef45236f3f04fba0239e0e4aab6a8cb1d0ce26",
       "reviewer_role": "Travel and Expense Coordinator",
       "approved_on": "2026-09-25"
     }

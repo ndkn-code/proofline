@@ -10,7 +10,7 @@ captured_on: 2026-08-04
 
 ## Purpose
 
-Use this job aid to key a supplier invoice that did not arrive through the invoice inbox.
+Use this SOP to key a supplier invoice that did not arrive through the invoice inbox.
 
 ## Before you start
 

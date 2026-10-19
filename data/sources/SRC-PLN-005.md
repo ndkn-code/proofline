@@ -10,7 +10,7 @@ captured_on: 2026-09-11
 
 ## Purpose
 
-Use this job aid to ask for a change to a budget after you have submitted it.
+Use this SOP to ask for a change to a budget after you have submitted it.
 
 ## Steps
 

@@ -1,5 +1,6 @@
 // Minimal front matter + section parser that keeps 1-based line numbers for locators. Isomorphic.
-import type { ArticleLine, Section } from "./types";
+// Used for the Markdown authoring sources of SOPs (before PDF rendering), for source captures, and in unit tests.
+import type { SopLine, Section } from "./types";
 
 export interface ParsedMarkdown {
   front: Record<string, string | string[]>;
@@ -41,19 +42,21 @@ export function parseMarkdown(raw: string): ParsedMarkdown {
     const h = /^##\s+(.*)$/.exec(text);
     if (h) {
       if (current) sections.push(current);
-      current = { heading: (h[1] ?? "").trim(), lineStart: lineNo, lineEnd: lineNo, lines: [] };
+      current = { heading: (h[1] ?? "").trim(), page: 1, lineStart: lineNo, lineEnd: lineNo, lines: [] };
       continue;
     }
     if (/^#\s+/.test(text)) continue; // document title line
     if (!current) {
       if (text.trim() === "") continue;
-      current = { heading: "Overview", lineStart: lineNo, lineEnd: lineNo, lines: [] };
+      current = { heading: "Overview", page: 1, lineStart: lineNo, lineEnd: lineNo, lines: [] };
     }
     if (text.trim() === "") continue;
+    const comment = /^<!--\s*([\s\S]*?)\s*-->$/.exec(text.trim());
     const stepMatch = /^(\d+)\.\s+(.*)$/.exec(text.trim());
     const bullet = /^[-*]\s+(.*)$/.exec(text.trim());
-    const body = stepMatch ? (stepMatch[2] ?? "") : bullet ? (bullet[1] ?? "") : text.trim();
-    const entry: ArticleLine = { line: lineNo, text: body, step: stepMatch ? Number(stepMatch[1]) : null };
+    const body = comment ? (comment[1] ?? "") : stepMatch ? (stepMatch[2] ?? "") : bullet ? (bullet[1] ?? "") : text.trim();
+    const entry: SopLine = { page: 1, line: lineNo, lineEnd: lineNo, text: body, step: stepMatch ? Number(stepMatch[1]) : null };
+    if (comment) entry.hidden = true;
     current.lines.push(entry);
     current.lineEnd = lineNo;
   }

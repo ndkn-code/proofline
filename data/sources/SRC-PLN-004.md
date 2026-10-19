@@ -10,7 +10,7 @@ captured_on: 2026-08-27
 
 ## Purpose
 
-Use this job aid to lock a planning cycle after the submission deadline.
+Use this SOP to lock a planning cycle after the submission deadline.
 
 ## Steps
 

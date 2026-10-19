@@ -10,7 +10,7 @@ captured_on: 2026-09-18
 
 ## Purpose
 
-Use this job aid to map planning department members to the cost center segment of the chart of accounts.
+Use this SOP to map planning department members to the cost center segment of the chart of accounts.
 
 ## Steps
 

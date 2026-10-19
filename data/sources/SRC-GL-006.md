@@ -10,7 +10,7 @@ captured_on: 2026-09-01
 
 ## Purpose
 
-Use this job aid to run and export a trial balance for a ledger and period.
+Use this SOP to run and export a trial balance for a ledger and period.
 
 ## Steps
 

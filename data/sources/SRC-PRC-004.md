@@ -10,7 +10,7 @@ captured_on: 2026-09-03
 
 ## Purpose
 
-Use this job aid to record a receipt when goods arrive.
+Use this SOP to record a receipt when goods arrive.
 
 ## Steps
 

@@ -14,23 +14,23 @@ export const REFUSAL_TEXT: Record<RefusalReason, { label: string; explain: strin
   },
   NO_APPROVED_EVIDENCE: {
     label: "No approved evidence",
-    explain: "No reviewed job aid or release-matched dictionary entry covers this question well enough to quote. Proofline does not guess.",
+    explain: "No reviewed SOP or release-matched dictionary entry covers this question well enough to quote. Proofline does not guess.",
   },
   SOURCE_STALE: {
     label: "Best source is past its review date",
-    explain: "The closest job aid is overdue for review, so it is excluded until its owner re-reviews it.",
+    explain: "The closest SOP is overdue for review, so it is excluded until its owner re-reviews it.",
   },
   CONFLICTING_EVIDENCE: {
     label: "Approved sources disagree",
-    explain: "Two current job aids state different values for the same rule. Both are on hold until the owner resolves the conflict.",
+    explain: "Two current SOPs state different values for the same rule. Both are on hold until the owner resolves the conflict.",
   },
   SOURCE_ON_HOLD: {
     label: "Best source is on hold",
-    explain: "The closest job aid failed a validator after publication and is on hold. It was not deleted, but it cannot be used for answers.",
+    explain: "The closest SOP failed a validator after publication and is on hold. It was not deleted, but it cannot be used for answers.",
   },
   NOT_APPROVED: {
     label: "Best source is not approved",
-    explain: "The closest job aid is a draft, or it was edited after approval so the approval no longer matches its content hash.",
+    explain: "The closest SOP is a draft, or it was edited after approval so the approval no longer matches its content hash.",
   },
   VERSION_MISMATCH: {
     label: "Evidence is for a different Ledgerline release",

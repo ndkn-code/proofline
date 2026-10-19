@@ -10,7 +10,7 @@ captured_on: 2026-08-03
 
 ## Purpose
 
-Use this job aid to record a one-time manual journal entry in the general ledger.
+Use this SOP to record a one-time manual journal entry in the general ledger.
 
 ## Before you start
 

@@ -10,7 +10,7 @@ captured_on: 2026-08-19
 
 ## Purpose
 
-Use this job aid to record a journal between two Halden Supply Co. entities.
+Use this SOP to record a journal between two Halden Supply Co. entities.
 
 ## Steps
 

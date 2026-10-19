@@ -10,7 +10,7 @@ captured_on: 2026-08-26
 
 ## Purpose
 
-Use this job aid to ask Supplier Onboarding to register a new supplier.
+Use this SOP to ask Supplier Onboarding to register a new supplier.
 
 ## Steps
 

@@ -10,7 +10,7 @@ captured_on: 2026-08-04
 
 ## Purpose
 
-Use this job aid to match a supplier invoice to purchase order lines and receipts.
+Use this SOP to match a supplier invoice to purchase order lines and receipts.
 
 ## Steps
 

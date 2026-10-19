@@ -10,7 +10,7 @@ captured_on: 2026-08-11
 
 ## Purpose
 
-Use this job aid to send an invoice that has no purchase order into the approval workflow.
+Use this SOP to send an invoice that has no purchase order into the approval workflow.
 
 ## Steps
 

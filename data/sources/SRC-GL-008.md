@@ -10,7 +10,7 @@ captured_on: 2026-09-10
 
 ## Purpose
 
-Use this job aid to request that a closed accounting period be reopened for a correction.
+Use this SOP to request that a closed accounting period be reopened for a correction.
 
 ## Steps
 

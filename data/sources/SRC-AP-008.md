@@ -10,7 +10,7 @@ captured_on: 2026-09-09
 
 ## Purpose
 
-Use this job aid when an invoice without a purchase order is waiting for your approval.
+Use this SOP when an invoice without a purchase order is waiting for your approval.
 
 ## Steps
 

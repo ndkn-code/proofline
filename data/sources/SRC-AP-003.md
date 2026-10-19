@@ -10,7 +10,7 @@ captured_on: 2026-09-02
 
 ## Purpose
 
-Use this job aid to clear a matching hold so an invoice can be paid.
+Use this SOP to clear a matching hold so an invoice can be paid.
 
 ## Steps
 

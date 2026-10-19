@@ -10,7 +10,7 @@ captured_on: 2026-08-06
 
 ## Purpose
 
-Use this job aid to claim reimbursement for business expenses.
+Use this SOP to claim reimbursement for business expenses.
 
 ## Steps
 

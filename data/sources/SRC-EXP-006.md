@@ -10,7 +10,7 @@ captured_on: 2025-11-30
 
 ## Purpose
 
-Use this job aid to book flights and hotels for business travel.
+Use this SOP to book flights and hotels for business travel.
 
 ## Steps
 

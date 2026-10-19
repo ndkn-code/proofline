@@ -10,7 +10,7 @@ captured_on: 2026-08-25
 
 ## Purpose
 
-Use this job aid to reconcile a supplier statement against open invoices and payments.
+Use this SOP to reconcile a supplier statement against open invoices and payments.
 
 ## Steps
 

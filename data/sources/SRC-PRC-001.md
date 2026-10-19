@@ -10,7 +10,7 @@ captured_on: 2026-08-12
 
 ## Purpose
 
-Use this job aid to request goods or services through a purchase requisition.
+Use this SOP to request goods or services through a purchase requisition.
 
 ## Steps
 

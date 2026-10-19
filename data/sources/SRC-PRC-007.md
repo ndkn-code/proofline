@@ -10,7 +10,7 @@ captured_on: 2026-03-31
 
 ## Purpose
 
-Use this job aid to cancel a requisition you no longer need.
+Use this SOP to cancel a requisition you no longer need.
 
 ## Steps
 

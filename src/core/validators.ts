@@ -2,35 +2,34 @@
 import { CONFLICT_SENTENCE_JACCARD, DUPLICATE_JACCARD, SUPPORT_COVERAGE } from "./config";
 import { sectionText } from "./markdown";
 import { extractExactValues, jaccard, maskValues, shingles, splitSentences, terms } from "./text";
-import type { Article, ArticleLine, DictionaryEntry, Finding, Locator, SourceDoc, Ticket } from "./types";
+import type { Sop, SopLine, DictionaryEntry, Finding, Locator, SourceDoc, Ticket } from "./types";
 
 export interface ValidatorInput {
-  articles: Article[];
+  sops: Sop[];
   sources: SourceDoc[];
   dictionary: DictionaryEntry[];
   tickets: Ticket[];
   asOf: string;
 }
 
-const isComment = (text: string): boolean => text.trim().startsWith("<!--");
-
-function lineLocator(docId: string, section: string, line: number, lineEnd = line): Locator {
-  return { docId, section, lineStart: line, lineEnd };
+function lineLocator(docId: string, section: string, l: Pick<SopLine, "page" | "line" | "lineEnd">): Locator {
+  return { docId, section, page: l.page, lineStart: l.line, lineEnd: l.lineEnd };
 }
 
-function frontMatterLine(raw: string, key: string): number {
-  const idx = raw.split("\n").findIndex((l) => l.startsWith(`${key}:`));
-  return idx >= 0 ? idx + 1 : 1;
+/** Locator of a document-control field (PDF page 1 control block, or Markdown front matter). */
+function metaLocator(a: Sop, key: string): Locator {
+  const m = a.metaLines[key] ?? a.metaLines.id ?? { page: 1, line: 1 };
+  return { docId: a.meta.id, section: "document control", page: m.page, lineStart: m.line, lineEnd: m.line };
 }
 
-/** Lines that state facts: everything except the Purpose summary and HTML comments. */
-function factLines(a: Article): { section: string; line: ArticleLine }[] {
-  const out: { section: string; line: ArticleLine }[] = [];
-  for (const s of a.sections) {
-    if (s.heading === "Purpose") continue;
-    for (const l of s.lines) if (!isComment(l.text)) out.push({ section: s.heading, line: l });
-  }
-  return out;
+/** Every line with its section, hidden text included (for pattern scans). */
+function allLines(a: Sop): { section: string; line: SopLine }[] {
+  return a.sections.flatMap((s) => s.lines.map((l) => ({ section: s.heading, line: l })));
+}
+
+/** Lines that state facts: everything except the Purpose summary and hidden text. */
+function factLines(a: Sop): { section: string; line: SopLine }[] {
+  return allLines(a).filter((x) => x.section !== "Purpose" && !x.line.hidden);
 }
 
 function allSourceLines(src: SourceDoc): string[] {
@@ -58,24 +57,24 @@ function support(lineText: string, sourceLines: string[]): { best: string | null
 const isTicketId = (id: string | undefined): boolean => !!id && /^TCK-\d+$/.test(id);
 
 // ---------------------------------------------------------------- STALE_SOURCE
-export function checkStale(articles: Article[], asOf: string): Finding[] {
-  return articles
+export function checkStale(sops: Sop[], asOf: string): Finding[] {
+  return sops
     .filter((a) => a.meta.review_due < asOf)
     .map((a) => ({
       code: "STALE_SOURCE" as const,
       severity: "block" as const,
       docId: a.meta.id,
-      lane: "job_aid" as const,
+      lane: "sop" as const,
       detail: `Review was due ${a.meta.review_due}; evaluation date is ${asOf}.`,
-      locator: lineLocator(a.meta.id, "front matter", frontMatterLine(a.raw, "review_due")),
+      locator: metaLocator(a, "review_due"),
     }));
 }
 
 // ------------------------------------------------- FACT_WITHOUT_EVIDENCE + EXACT_VALUE_ALTERED
-export function checkEvidence(articles: Article[], sources: SourceDoc[]): Finding[] {
+export function checkEvidence(sops: Sop[], sources: SourceDoc[]): Finding[] {
   const byId = new Map(sources.map((s) => [s.id, s]));
   const out: Finding[] = [];
-  for (const a of articles) {
+  for (const a of sops) {
     const sid = a.meta.source_id;
     if (isTicketId(sid)) continue; // handled by TICKET_AS_AUTHORITY
     const src = sid ? byId.get(sid) : undefined;
@@ -84,9 +83,9 @@ export function checkEvidence(articles: Article[], sources: SourceDoc[]): Findin
         code: "FACT_WITHOUT_EVIDENCE",
         severity: "block",
         docId: a.meta.id,
-        lane: "job_aid",
-        detail: sid ? `Cited source ${sid} was not found in the source store.` : "Article declares no source_id.",
-        locator: lineLocator(a.meta.id, "front matter", frontMatterLine(a.raw, sid ? "source_id" : "id")),
+        lane: "sop",
+        detail: sid ? `Cited source ${sid} was not found in the source store.` : "Sop declares no source_id.",
+        locator: metaLocator(a, sid ? "source_id" : "id"),
       });
       continue;
     }
@@ -99,9 +98,9 @@ export function checkEvidence(articles: Article[], sources: SourceDoc[]): Findin
           code: "FACT_WITHOUT_EVIDENCE",
           severity: "block",
           docId: a.meta.id,
-          lane: "job_aid",
+          lane: "sop",
           detail: `No supporting passage in ${src.id} for: "${line.text}" (best term coverage ${(sup.coverage * 100).toFixed(0)}%).`,
-          locator: lineLocator(a.meta.id, section, line.line),
+          locator: lineLocator(a.meta.id, section, line),
           relatedId: src.id,
         });
         continue;
@@ -114,9 +113,9 @@ export function checkEvidence(articles: Article[], sources: SourceDoc[]): Findin
           code: "EXACT_VALUE_ALTERED",
           severity: "block",
           docId: a.meta.id,
-          lane: "job_aid",
+          lane: "sop",
           detail: `Value "${v}" does not appear in ${src.id}.${sourceVals.length ? ` Closest source line has: ${sourceVals.map((x) => `"${x}"`).join(", ")}.` : ""}`,
-          locator: lineLocator(a.meta.id, section, line.line),
+          locator: lineLocator(a.meta.id, section, line),
           relatedId: src.id,
         });
       }
@@ -129,13 +128,13 @@ export function checkEvidence(articles: Article[], sources: SourceDoc[]): Findin
 interface ValueSentence {
   docId: string;
   section: string;
-  line: number;
+  line: SopLine;
   text: string;
   values: string[];
   maskedTerms: Set<string>;
 }
 
-function valueSentences(a: Article): ValueSentence[] {
+function valueSentences(a: Sop): ValueSentence[] {
   const out: ValueSentence[] = [];
   for (const { section, line } of factLines(a)) {
     for (const sentence of splitSentences(line.text)) {
@@ -143,14 +142,14 @@ function valueSentences(a: Article): ValueSentence[] {
       if (values.length === 0) continue;
       const maskedTerms = new Set(terms(maskValues(sentence)).filter((t) => t !== "valu"));
       if (maskedTerms.size < 3) continue; // too little wording to claim the sentences say the same thing
-      out.push({ docId: a.meta.id, section, line: line.line, text: sentence, values, maskedTerms });
+      out.push({ docId: a.meta.id, section, line, text: sentence, values, maskedTerms });
     }
   }
   return out;
 }
 
-export function checkConflicts(articles: Article[], asOf: string): Finding[] {
-  const current = articles.filter((a) => a.meta.status === "published" && a.meta.review_due >= asOf);
+export function checkConflicts(sops: Sop[], asOf: string): Finding[] {
+  const current = sops.filter((a) => a.meta.status === "published" && a.meta.review_due >= asOf);
   const out: Finding[] = [];
   for (let i = 0; i < current.length; i++) {
     for (let j = i + 1; j < current.length; j++) {
@@ -170,7 +169,7 @@ export function checkConflicts(articles: Article[], asOf: string): Finding[] {
             code: "UNRESOLVED_CONFLICT",
             severity: "block",
             docId: x.docId,
-            lane: "job_aid",
+            lane: "sop",
             detail: detail(y, x),
             locator: lineLocator(x.docId, x.section, x.line),
             relatedId: y.docId,
@@ -179,7 +178,7 @@ export function checkConflicts(articles: Article[], asOf: string): Finding[] {
             code: "UNRESOLVED_CONFLICT",
             severity: "block",
             docId: y.docId,
-            lane: "job_aid",
+            lane: "sop",
             detail: detail(x, y),
             locator: lineLocator(y.docId, y.section, y.line),
             relatedId: x.docId,
@@ -192,22 +191,22 @@ export function checkConflicts(articles: Article[], asOf: string): Finding[] {
 }
 
 // ---------------------------------------------------------------- VERSION_MISMATCH
-export function checkVersions(articles: Article[], dictionary: DictionaryEntry[]): Finding[] {
+export function checkVersions(sops: Sop[], dictionary: DictionaryEntry[]): Finding[] {
   const byId = new Map(dictionary.map((d) => [d.id, d]));
   const out: Finding[] = [];
-  for (const a of articles) {
+  for (const a of sops) {
     for (const ref of a.meta.dictionary_refs ?? []) {
       const entry = byId.get(ref);
-      const loc = lineLocator(a.meta.id, "front matter", frontMatterLine(a.raw, "dictionary_refs"));
+      const loc = metaLocator(a, "dictionary_refs");
       if (!entry) {
-        out.push({ code: "FACT_WITHOUT_EVIDENCE", severity: "block", docId: a.meta.id, lane: "job_aid", detail: `Dictionary entry ${ref} does not exist.`, locator: loc });
+        out.push({ code: "FACT_WITHOUT_EVIDENCE", severity: "block", docId: a.meta.id, lane: "sop", detail: `Dictionary entry ${ref} does not exist.`, locator: loc });
       } else if (entry.erp_release !== a.meta.erp_release) {
         out.push({
           code: "VERSION_MISMATCH",
           severity: "block",
           docId: a.meta.id,
-          lane: "job_aid",
-          detail: `Article is for release ${a.meta.erp_release} but relies on ${ref}, which is authoritative only for release ${entry.erp_release}.`,
+          lane: "sop",
+          detail: `Sop is for release ${a.meta.erp_release} but relies on ${ref}, which is authoritative only for release ${entry.erp_release}.`,
           locator: loc,
           relatedId: ref,
         });
@@ -218,17 +217,17 @@ export function checkVersions(articles: Article[], dictionary: DictionaryEntry[]
 }
 
 // ---------------------------------------------------------------- TICKET_AS_AUTHORITY
-export function checkTicketAuthority(articles: Article[]): Finding[] {
+export function checkTicketAuthority(sops: Sop[]): Finding[] {
   const out: Finding[] = [];
-  for (const a of articles) {
+  for (const a of sops) {
     if (isTicketId(a.meta.source_id)) {
       out.push({
         code: "TICKET_AS_AUTHORITY",
         severity: "block",
         docId: a.meta.id,
-        lane: "job_aid",
-        detail: `Article cites past ticket ${a.meta.source_id} as its source. Tickets are evidence of what happened, not approved procedure.`,
-        locator: lineLocator(a.meta.id, "front matter", frontMatterLine(a.raw, "source_id")),
+        lane: "sop",
+        detail: `Sop cites past ticket ${a.meta.source_id} as its source. Tickets are evidence of what happened, not approved procedure.`,
+        locator: metaLocator(a, "source_id"),
         relatedId: a.meta.source_id,
       });
       continue;
@@ -240,9 +239,9 @@ export function checkTicketAuthority(articles: Article[]): Finding[] {
           code: "TICKET_AS_AUTHORITY",
           severity: "block",
           docId: a.meta.id,
-          lane: "job_aid",
+          lane: "sop",
           detail: `Line relies on ticket ${m[1]} as authority.`,
-          locator: lineLocator(a.meta.id, section, line.line),
+          locator: lineLocator(a.meta.id, section, line),
           relatedId: m[1],
         });
       }
@@ -273,24 +272,25 @@ export function redactRestricted(text: string): string {
   return out;
 }
 
-function lineOf(raw: string, predicate: (line: string) => boolean): number {
-  const i = raw.split("\n").findIndex(predicate);
-  return i >= 0 ? i + 1 : 1;
+/** First line (any section, hidden text included) that matches, with its page and line locator. */
+function locate(a: Sop, predicate: (text: string) => boolean): Locator | undefined {
+  const hit = allLines(a).find((x) => predicate(x.line.text));
+  return hit ? lineLocator(a.meta.id, hit.section, hit.line) : undefined;
 }
 
-export function checkRestricted(articles: Article[], tickets: Ticket[]): Finding[] {
+export function checkRestricted(sops: Sop[], tickets: Ticket[]): Finding[] {
   const out: Finding[] = [];
-  for (const a of articles) {
-    const hits = findRestricted(sectionText(a.sections));
+  for (const a of sops) {
+    const hits = findRestricted(`${a.meta.title}\n${sectionText(a.sections)}`);
     if (hits.length) {
-      const line = lineOf(a.raw, (l) => findRestricted(l).length > 0);
+      const locator = locate(a, (t) => findRestricted(t).length > 0);
       out.push({
         code: "RESTRICTED_DATA",
         severity: "block",
         docId: a.meta.id,
-        lane: "job_aid",
+        lane: "sop",
         detail: `Contains restricted data pattern(s): ${hits.join(", ")}.`,
-        locator: lineLocator(a.meta.id, "body", line),
+        ...(locator ? { locator } : {}),
       });
     }
   }
@@ -323,25 +323,27 @@ export function findInjection(text: string): string | null {
   return null;
 }
 
-export function checkInjection(articles: Article[], sources: SourceDoc[], tickets: Ticket[]): Finding[] {
+export function checkInjection(sops: Sop[], sources: SourceDoc[], tickets: Ticket[]): Finding[] {
   const out: Finding[] = [];
-  for (const a of articles) {
-    const hit = findInjection(a.raw);
+  for (const a of sops) {
+    // Scan the full extracted text, hidden text included: that is exactly where planted instructions hide.
+    const hit = findInjection(`${a.meta.title}\n${a.sections.flatMap((s) => [s.heading, ...s.lines.map((l) => l.text)]).join("\n")}`);
     if (hit) {
-      const line = lineOf(a.raw, (l) => findInjection(l) !== null);
+      const where = allLines(a).find((x) => findInjection(x.line.text) !== null);
+      const hidden = where?.line.hidden ? " It is hidden text (not visible to a reader of the PDF)." : "";
       out.push({
         code: "PROMPT_INJECTION_IN_SOURCE",
         severity: "block",
         docId: a.meta.id,
-        lane: "job_aid",
-        detail: `Text addressed to an assistant was found and ignored: "${hit.slice(0, 80)}".`,
-        locator: lineLocator(a.meta.id, "body", line),
+        lane: "sop",
+        detail: `Text addressed to an assistant was found and ignored: "${hit.slice(0, 80)}".${hidden}`,
+        ...(where ? { locator: lineLocator(a.meta.id, where.section, where.line) } : {}),
       });
     }
   }
   for (const s of sources) {
     const hit = findInjection(s.raw);
-    if (hit) out.push({ code: "PROMPT_INJECTION_IN_SOURCE", severity: "block", docId: s.id, lane: "job_aid", detail: `Instruction-like text in source: "${hit.slice(0, 80)}".` });
+    if (hit) out.push({ code: "PROMPT_INJECTION_IN_SOURCE", severity: "block", docId: s.id, lane: "sop", detail: `Instruction-like text in source: "${hit.slice(0, 80)}".` });
   }
   for (const t of tickets) {
     const hit = findInjection(`${t.subject}\n${t.description}\n${t.resolution}`);
@@ -359,8 +361,8 @@ export function checkInjection(articles: Article[], sources: SourceDoc[], ticket
 }
 
 // ---------------------------------------------------------------- DUPLICATE_CONTENT
-export function checkDuplicates(articles: Article[]): Finding[] {
-  const pub = articles.filter((a) => a.meta.status === "published").sort((a, b) => a.meta.id.localeCompare(b.meta.id));
+export function checkDuplicates(sops: Sop[]): Finding[] {
+  const pub = sops.filter((a) => a.meta.status === "published").sort((a, b) => a.meta.id.localeCompare(b.meta.id));
   const sh = new Map(pub.map((a) => [a.meta.id, shingles(sectionText(a.sections.filter((s) => s.heading !== "Purpose")))]));
   const out: Finding[] = [];
   const flagged = new Set<string>();
@@ -377,7 +379,7 @@ export function checkDuplicates(articles: Article[]): Finding[] {
           code: "DUPLICATE_CONTENT",
           severity: "block",
           docId: b.meta.id,
-          lane: "job_aid",
+          lane: "sop",
           detail: `Near-duplicate of ${a.meta.id} (shingle similarity ${(sim * 100).toFixed(0)}%). ${a.meta.id} stays canonical; this copy is held.`,
           relatedId: a.meta.id,
         });
@@ -389,13 +391,13 @@ export function checkDuplicates(articles: Article[]): Finding[] {
 
 export function runValidators(input: ValidatorInput): Finding[] {
   return [
-    ...checkStale(input.articles, input.asOf),
-    ...checkEvidence(input.articles, input.sources),
-    ...checkConflicts(input.articles, input.asOf),
-    ...checkVersions(input.articles, input.dictionary),
-    ...checkTicketAuthority(input.articles),
-    ...checkRestricted(input.articles, input.tickets),
-    ...checkInjection(input.articles, input.sources, input.tickets),
-    ...checkDuplicates(input.articles),
+    ...checkStale(input.sops, input.asOf),
+    ...checkEvidence(input.sops, input.sources),
+    ...checkConflicts(input.sops, input.asOf),
+    ...checkVersions(input.sops, input.dictionary),
+    ...checkTicketAuthority(input.sops),
+    ...checkRestricted(input.sops, input.tickets),
+    ...checkInjection(input.sops, input.sources, input.tickets),
+    ...checkDuplicates(input.sops),
   ];
 }

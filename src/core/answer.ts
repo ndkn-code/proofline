@@ -1,4 +1,5 @@
-// The answerer. Extractive only: every step is a verbatim line from an approved source, with its locator.
+// The answerer. Extractive only: every step is a verbatim line extracted from an approved SOP PDF (or a
+// release-matched dictionary entry), with its SOP id, page and line locator.
 // If the evidence is weak, stale, conflicting, held, unapproved or for another release, it refuses and says why.
 import { Bm25Index } from "./bm25";
 import { ESCALATION_QUEUE, MAX_CANDIDATES, MIN_COVERAGE, MIN_SCORE } from "./config";
@@ -12,7 +13,7 @@ import type {
   Citation,
   CorpusIndex,
   Finding,
-  IndexedArticle,
+  IndexedSop,
   IndexedDictionaryEntry,
   Lane,
   Module,
@@ -26,14 +27,12 @@ interface DocMeta {
   title: string;
   module: Module;
   release: string;
-  article?: IndexedArticle;
+  sop?: IndexedSop;
   entry?: IndexedDictionaryEntry;
 }
 
-const isComment = (t: string): boolean => t.trim().startsWith("<!--");
-
-function articleText(a: IndexedArticle): string {
-  const body = a.sections.flatMap((s) => [s.heading, ...s.lines.filter((l) => !isComment(l.text)).map((l) => l.text)]);
+function sopText(a: IndexedSop): string {
+  const body = a.sections.flatMap((s) => [s.heading, ...s.lines.filter((l) => !l.hidden).map((l) => l.text)]);
   return [a.title, a.title, ...body].join("\n");
 }
 
@@ -43,7 +42,7 @@ function entryText(e: IndexedDictionaryEntry): string {
 }
 
 /** Holds caused only by duplication do not block answers: the canonical copy answers instead. */
-function onlyDuplicate(a: IndexedArticle): boolean {
+function onlyDuplicate(a: IndexedSop): boolean {
   return a.status === "held" && a.findings.filter((f) => f.severity === "block").every((f) => f.code === "DUPLICATE_CONTENT");
 }
 
@@ -51,13 +50,13 @@ function reasonFor(doc: DocMeta, targetRelease: string): { reason: RefusalReason
   if (doc.release !== targetRelease) {
     return { reason: "VERSION_MISMATCH", findings: [], why: `Only available for release ${doc.release}.` };
   }
-  const a = doc.article;
+  const a = doc.sop;
   if (!a) return { reason: "NO_APPROVED_EVIDENCE", findings: [], why: "Not eligible." };
   const blocking = a.findings.filter((f) => f.severity === "block");
   if (a.status === "draft") return { reason: "NOT_APPROVED", findings: [], why: a.gate.reasons.join(" ") };
   if (a.status === "stale") return { reason: "SOURCE_STALE", findings: blocking, why: `Review was due ${a.review_due}.` };
   if (blocking.some((f) => f.code === "UNRESOLVED_CONFLICT")) {
-    return { reason: "CONFLICTING_EVIDENCE", findings: blocking, why: "On hold: conflicts with another current job aid." };
+    return { reason: "CONFLICTING_EVIDENCE", findings: blocking, why: "On hold: conflicts with another current SOP." };
   }
   if (blocking.some((f) => f.code === "VERSION_MISMATCH")) {
     return { reason: "VERSION_MISMATCH", findings: blocking, why: "On hold: relies on a dictionary entry from another release." };
@@ -71,11 +70,11 @@ export interface Answerer {
 
 export function createAnswerer(index: CorpusIndex): Answerer {
   const docs: DocMeta[] = [
-    ...index.articles.map((a) => ({ id: a.id, lane: "job_aid" as const, title: a.title, module: a.module, release: a.erp_release, article: a })),
+    ...index.sops.map((a) => ({ id: a.id, lane: "sop" as const, title: a.title, module: a.module, release: a.erp_release, sop: a })),
     ...index.dictionary.map((e) => ({ id: e.id, lane: "dictionary" as const, title: `${e.term} (release ${e.erp_release})`, module: e.module, release: e.erp_release, entry: e })),
   ];
   const byId = new Map(docs.map((d) => [d.id, d]));
-  const bm25 = new Bm25Index(docs.map((d) => ({ id: d.id, text: d.article ? articleText(d.article) : entryText(d.entry!) })));
+  const bm25 = new Bm25Index(docs.map((d) => ({ id: d.id, text: d.sop ? sopText(d.sop) : entryText(d.entry!) })));
 
   const usableTickets = index.tickets.filter((t) => !t.flagged.includes("PROMPT_INJECTION_IN_SOURCE"));
   const ticketIndex = new Bm25Index(usableTickets.map((t) => ({ id: t.id, text: `${t.redacted.subject}\n${t.redacted.description}\n${t.redacted.resolution}` })));
@@ -122,7 +121,7 @@ export function createAnswerer(index: CorpusIndex): Answerer {
       });
 
     if (r.userOverride) return refuse("OUT_OF_SCOPE", "The question asks the assistant to change its own rules. Sources and questions are treated as data, not instructions.");
-    if (r.exception) return refuse("EXCEPTION_REQUIRES_HUMAN", "No job aid can grant an exception.");
+    if (r.exception) return refuse("EXCEPTION_REQUIRES_HUMAN", "No SOP can grant an exception.");
     if (!r.inScope) return refuse("OUT_OF_SCOPE", "No finance module matched the question.");
     if (r.queryTerms.length === 0) return refuse("NO_APPROVED_EVIDENCE", "The question has no searchable terms.");
 
@@ -134,7 +133,7 @@ export function createAnswerer(index: CorpusIndex): Answerer {
       const d = byId.get(h.id)!;
       const passes = h.score >= MIN_SCORE && h.coverage >= MIN_COVERAGE && (d.lane !== "dictionary" || termNameMatch(d.entry!, qset));
       const inRelease = d.release === r.release;
-      const eligible = inRelease && (d.lane === "dictionary" || d.article!.status === "published");
+      const eligible = inRelease && (d.lane === "dictionary" || d.sop!.status === "published");
       return { h, d, passes, inRelease, eligible };
     });
 
@@ -144,7 +143,7 @@ export function createAnswerer(index: CorpusIndex): Answerer {
       title: x.d.title,
       module: x.d.module,
       erp_release: x.d.release,
-      status: x.d.article ? x.d.article.status : "published",
+      status: x.d.sop ? x.d.sop.status : "published",
       score: Number(x.h.score.toFixed(3)),
       coverage: Number(x.h.coverage.toFixed(3)),
       answerable: x.eligible && x.passes,
@@ -159,7 +158,7 @@ export function createAnswerer(index: CorpusIndex): Answerer {
           : "Dictionary term not named in the question";
     base.candidates = scored.filter((x) => x.eligible).slice(0, MAX_CANDIDATES).map((x) => toCandidate(x, x.passes ? null : failWhy(x)));
     base.excluded = scored
-      .filter((x) => !x.eligible && x.passes && !(x.d.article && onlyDuplicate(x.d.article)))
+      .filter((x) => !x.eligible && x.passes && !(x.d.sop && onlyDuplicate(x.d.sop)))
       .slice(0, MAX_CANDIDATES)
       .map((x) => toCandidate(x, reasonFor(x.d, r.release).why));
 
@@ -175,20 +174,20 @@ export function createAnswerer(index: CorpusIndex): Answerer {
       });
 
     const passing = scored.filter((x) => x.passes);
-    const preferLane = r.intent === "definition" ? "dictionary" : "job_aid";
+    const preferLane = r.intent === "definition" ? "dictionary" : "sop";
     const answerable = passing.filter((x) => x.eligible);
     const best = answerable.find((x) => x.d.lane === preferLane) ?? answerable[0];
 
     // A stronger in-release match that is not eligible blocks a weaker answer: answering from the
     // runner-up would hide that the best evidence is stale, conflicting, held or unapproved.
-    const blocker = passing.find((x) => x.inRelease && !x.eligible && !(x.d.article && onlyDuplicate(x.d.article)));
+    const blocker = passing.find((x) => x.inRelease && !x.eligible && !(x.d.sop && onlyDuplicate(x.d.sop)));
     if (blocker && (!best || blocker.h.score > best.h.score)) {
       const { reason, findings, why } = reasonFor(blocker.d, r.release);
       return refuse(reason, `Closest source: ${blocker.d.id} "${blocker.d.title}". ${why}`, blocker.d.id, findings, blocker.d.module);
     }
 
     if (!best) {
-      const other = passing.find((x) => !x.inRelease && (x.d.lane === "dictionary" || x.d.article!.status === "published"));
+      const other = passing.find((x) => !x.inRelease && (x.d.lane === "dictionary" || x.d.sop!.status === "published"));
       if (other) {
         return refuse("VERSION_MISMATCH", `You asked about release ${r.release}. ${other.d.id} "${other.d.title}" applies to release ${other.d.release} only.`, other.d.id, [], other.d.module);
       }
@@ -211,7 +210,7 @@ export function createAnswerer(index: CorpusIndex): Answerer {
         docId: e.id,
         lane: "dictionary",
         title: e.term,
-        locator: { docId: e.id, section: "definition", lineStart: 1, lineEnd: 1 },
+        locator: { docId: e.id, section: "definition", page: 1, lineStart: 1, lineEnd: 1 },
         quote,
         sourceHash: e.hash,
         draftHash: e.hash,
@@ -220,20 +219,20 @@ export function createAnswerer(index: CorpusIndex): Answerer {
       });
       steps.push({ n: 1, kind: "definition", text: `${e.term} (release ${e.erp_release}): ${quote}`, citation: 1 });
     } else {
-      const a = d.article!;
+      const a = d.sop!;
       const wanted = ["Before you start", "Steps", "Notes"];
       for (const heading of wanted) {
         const sec = a.sections.find((s) => s.heading === heading);
         if (!sec) continue;
         for (const line of sec.lines) {
-          if (isComment(line.text)) continue;
+          if (line.hidden) continue; // hidden PDF text is never indexed or quoted
           const n = citations.length + 1;
           citations.push({
             n,
             docId: a.id,
-            lane: "job_aid",
+            lane: "sop",
             title: a.title,
-            locator: { docId: a.id, section: heading, lineStart: line.line, lineEnd: line.line },
+            locator: { docId: a.id, section: heading, page: line.page, lineStart: line.line, lineEnd: line.lineEnd },
             quote: line.text,
             sourceHash: a.provenance.sourceHash,
             draftHash: a.provenance.draftHash,

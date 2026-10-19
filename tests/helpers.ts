@@ -1,8 +1,8 @@
 import { sha256 } from "../src/core/hash";
-import { parseArticle, parseSource } from "../src/core/ingest";
-import type { Article, SourceDoc } from "../src/core/types";
+import { parseSopMarkdown, parseSource } from "../src/core/ingest";
+import type { Sop, SourceDoc } from "../src/core/types";
 
-export interface MkArticle {
+export interface MkSop {
   id: string;
   module?: string;
   release?: string;
@@ -14,11 +14,12 @@ export interface MkArticle {
   notes?: string[];
 }
 
-export function articleMd(o: MkArticle): string {
+export function sopMd(o: MkSop): string {
   const fm = [
     "---",
     `id: ${o.id}`,
-    `title: Test article ${o.id}`,
+    "doc_type: sop",
+    `title: Test SOP ${o.id}`,
     `module: ${o.module ?? "Accounts Payable"}`,
     `erp_release: ${o.release ?? "26.1"}`,
     "owner_role: AP Operations Supervisor",
@@ -28,7 +29,7 @@ export function articleMd(o: MkArticle): string {
   ];
   if (o.sourceId !== null) fm.push(`source_id: ${o.sourceId ?? `SRC-${o.id}`}`);
   if (o.dictionaryRefs) fm.push(`dictionary_refs: [${o.dictionaryRefs.join(", ")}]`);
-  fm.push("---", "", `# Test article ${o.id}`, "", "## Purpose", "", "Test purpose line.", "", "## Steps", "");
+  fm.push("---", "", `# Test SOP ${o.id}`, "", "## Purpose", "", "Test purpose line.", "", "## Steps", "");
   o.steps.forEach((s, i) => fm.push(`${i + 1}. ${s}`));
   if (o.notes?.length) {
     fm.push("", "## Notes", "");
@@ -37,8 +38,8 @@ export function articleMd(o: MkArticle): string {
   return fm.join("\n") + "\n";
 }
 
-export function mkArticle(o: MkArticle): Article {
-  return parseArticle({ path: `${o.id}.md`, raw: articleMd(o) }, sha256);
+export function mkSop(o: MkSop): Sop {
+  return parseSopMarkdown({ path: `${o.id}.md`, raw: sopMd(o) }, sha256);
 }
 
 export function mkSource(id: string, steps: string[], notes: string[] = []): SourceDoc {

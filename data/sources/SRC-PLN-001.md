@@ -10,7 +10,7 @@ captured_on: 2026-08-20
 
 ## Purpose
 
-Use this job aid to load budget amounts into a planning scenario from the standard spreadsheet template.
+Use this SOP to load budget amounts into a planning scenario from the standard spreadsheet template.
 
 ## Steps
 

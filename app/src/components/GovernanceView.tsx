@@ -1,5 +1,6 @@
 import { Fragment, useMemo, useState } from "react";
-import type { EffectiveStatus, IndexedArticle } from "../../../src/core/types";
+import type { EffectiveStatus, IndexedSop } from "../../../src/core/types";
+import { formatLocator } from "../../../src/core/sop-pdf";
 import { index } from "../data";
 import { Card, Code, Hash, SectionTitle, StatusPill } from "./ui";
 
@@ -9,11 +10,11 @@ export function GovernanceView() {
   const [filter, setFilter] = useState<"all" | EffectiveStatus>("all");
   const [open, setOpen] = useState<string | null>(null);
   const counts = useMemo(() => {
-    const c: Record<string, number> = { all: index.articles.length };
-    for (const a of index.articles) c[a.status] = (c[a.status] ?? 0) + 1;
+    const c: Record<string, number> = { all: index.sops.length };
+    for (const a of index.sops) c[a.status] = (c[a.status] ?? 0) + 1;
     return c;
   }, []);
-  const rows = index.articles.filter((a) => filter === "all" || a.status === filter);
+  const rows = index.sops.filter((a) => filter === "all" || a.status === filter);
   const flaggedTickets = index.tickets.filter((t) => t.flagged.length);
 
   return (
@@ -27,23 +28,23 @@ export function GovernanceView() {
             className={`rounded-lg border p-4 text-left transition-colors ${filter === f ? "border-ink" : "border-line hover:border-ink-2"}`}
           >
             <div className="text-2xl font-semibold tabular-nums">{counts[f] ?? 0}</div>
-            <div className="mt-1 text-xs text-mute capitalize">{f === "all" ? "job aids" : f}</div>
+            <div className="mt-1 text-xs text-mute capitalize">{f === "all" ? "SOP PDFs" : f}</div>
           </button>
         ))}
       </div>
 
       <div>
-        <SectionTitle aside={`Evaluation date ${index.as_of}. Only published articles can be cited.`}>Job aids</SectionTitle>
+        <SectionTitle aside={`Evaluation date ${index.as_of}. Only published SOPs can be cited.`}>SOPs and knowledge documentation</SectionTitle>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px] text-left text-sm">
             <thead className="text-xs text-mute">
               <tr className="border-b border-line">
-                <th className="py-2 pr-3 font-medium">Article</th>
+                <th className="py-2 pr-3 font-medium">SOP</th>
                 <th className="py-2 pr-3 font-medium">Module</th>
                 <th className="py-2 pr-3 font-medium">Release</th>
                 <th className="py-2 pr-3 font-medium">Status</th>
                 <th className="py-2 pr-3 font-medium">Validator findings</th>
-                <th className="py-2 pr-3 font-medium">Approval bound to hash</th>
+                <th className="py-2 pr-3 font-medium">Approval bound to PDF hash</th>
                 <th className="py-2 font-medium">Review due</th>
               </tr>
             </thead>
@@ -82,7 +83,7 @@ export function GovernanceView() {
             </tbody>
           </table>
         </div>
-        <p className="mt-2 text-xs text-mute">Select a row to see findings with line locators and the provenance chain.</p>
+        <p className="mt-2 text-xs text-mute">Select a row to see findings with page and line locators and the provenance chain.</p>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-2">
@@ -127,7 +128,7 @@ export function GovernanceView() {
             ))}
           </div>
           <p className="mt-3 text-xs text-mute">
-            {index.versions.length} content-hashed versions recorded (articles, sources, dictionary entries, tickets).
+            {index.versions.length} content-hashed versions recorded (sops, sources, dictionary entries, tickets).
           </p>
         </div>
       </div>
@@ -135,7 +136,7 @@ export function GovernanceView() {
   );
 }
 
-function ApprovalCell({ a }: { a: IndexedArticle }) {
+function ApprovalCell({ a }: { a: IndexedSop }) {
   if (a.gate.approvalValid && a.gate.approval) {
     return (
       <div>
@@ -155,7 +156,7 @@ function ApprovalCell({ a }: { a: IndexedArticle }) {
   return <span className="text-mute">not approved</span>;
 }
 
-function Detail({ a }: { a: IndexedArticle }) {
+function Detail({ a }: { a: IndexedSop }) {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <div>
@@ -180,7 +181,7 @@ function Detail({ a }: { a: IndexedArticle }) {
                   <Code>{f.code}</Code>{" "}
                   {f.locator ? (
                     <span className="font-mono text-[11px] text-mute">
-                      {f.locator.section} L{f.locator.lineStart}
+                      {formatLocator(f.locator)} ({f.locator.section})
                     </span>
                   ) : null}
                   <div className="mt-1 text-ink-2">{f.detail}</div>
@@ -198,7 +199,7 @@ function Detail({ a }: { a: IndexedArticle }) {
             <Hash value={a.provenance.sourceHash} />
           </li>
           <li className="flex justify-between gap-2">
-            <span className="text-mute">Current draft</span>
+            <span className="text-mute">Current PDF version (SHA-256)</span>
             <Hash value={a.provenance.draftHash} />
           </li>
           <li className="flex justify-between gap-2">
@@ -207,7 +208,7 @@ function Detail({ a }: { a: IndexedArticle }) {
           </li>
         </ol>
         <div className="mt-4 text-xs text-mute">
-          Owner {a.owner_role}. Reviewed {a.reviewed_on}. File <span className="font-mono">{a.path}</span>.
+          Owner {a.owner_role}. Reviewed {a.reviewed_on}. PDF <span className="font-mono">{a.path}</span>, {a.pages} pages.
         </div>
       </div>
     </div>

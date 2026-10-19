@@ -10,7 +10,7 @@ captured_on: 2026-08-03
 
 ## Purpose
 
-Use this job aid to reverse a journal that has already posted to the general ledger.
+Use this SOP to reverse a journal that has already posted to the general ledger.
 
 ## Steps
 

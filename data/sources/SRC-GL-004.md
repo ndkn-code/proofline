@@ -10,7 +10,7 @@ captured_on: 2026-09-08
 
 ## Purpose
 
-Use this job aid to close a general ledger accounting period at month end in release 26.1.
+Use this SOP to close a general ledger accounting period at month end in release 26.1.
 
 ## Before you start
 

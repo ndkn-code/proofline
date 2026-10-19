@@ -10,7 +10,7 @@ captured_on: 2026-07-28
 
 ## Purpose
 
-Use this job aid to void a supplier payment that was issued in error.
+Use this SOP to void a supplier payment that was issued in error.
 
 ## Steps
 

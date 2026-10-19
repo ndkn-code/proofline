@@ -34,7 +34,7 @@ export function App() {
               <span className="text-xs text-mute">evidence-grounded finance ERP support</span>
             </div>
             <p className="mt-1 max-w-2xl text-xs text-mute">
-              Synthetic demo. Halden Supply Co. and the Ledgerline ERP are fictional. Answers are quoted from reviewed job aids only; everything runs
+              Synthetic demo. Halden Supply Co. and the Ledgerline ERP are fictional. Answers are quoted from reviewed SOP PDFs only, with page and line citations; everything runs
               offline in your browser.
             </p>
           </div>

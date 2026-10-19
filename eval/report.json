@@ -1,13 +1,18 @@
 {
   "label": "synthetic eval set, n = 92",
-  "generated_at": "2026-10-19T07:20:22.198Z",
+  "generated_at": "2026-10-19T15:30:24.261Z",
   "as_of": "2026-10-15",
   "thresholds": {
     "min_score": 4,
     "min_coverage": 0.5
   },
   "corpus": {
-    "articles": 40,
+    "sops": 40,
+    "sop_pdfs": {
+      "files": 40,
+      "pages": 80,
+      "bytes": 140318
+    },
     "status": {
       "published": 23,
       "held": 12,
@@ -97,10 +102,10 @@
       "definition": "Planted defects flagged with the right validator code."
     },
     "latency_ms": {
-      "p50": 0.024,
-      "p95": 0.061,
-      "max": 0.161,
-      "index_build_ms": 27,
+      "p50": 0.027,
+      "p95": 0.051,
+      "max": 0.072,
+      "index_build_ms": 226.8,
       "definition": "Wall-clock time of answer() per question, in-process, after index build."
     }
   },
@@ -120,7 +125,7 @@
       "rate": 100,
       "missed": [],
       "unseededFindings": [
-        "JA-GL-008"
+        "SOP-GL-008"
       ]
     },
     {
@@ -177,14 +182,14 @@
       "detected": 2,
       "rate": 66.7,
       "missed": [
-        "JA-PRC-006 (Paraphrased copy of JA-PRC-001)"
+        "SOP-PRC-006 (Paraphrased copy of SOP-PRC-001)"
       ],
       "unseededFindings": []
     }
   ],
   "review_gate": [
     {
-      "docId": "JA-GL-008",
+      "docId": "SOP-GL-008",
       "expected": "APPROVAL_INVALIDATED",
       "detected": true,
       "status": "draft"
@@ -284,7 +289,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-GL-001"
+        "SOP-GL-001"
       ],
       "cited": [],
       "expectedReason": null,
@@ -297,7 +302,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.161,
+      "latencyMs": 0.051,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -307,7 +312,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-GL-002"
+        "SOP-GL-002"
       ],
       "cited": [],
       "expectedReason": null,
@@ -320,7 +325,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.056,
+      "latencyMs": 0.043,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -330,7 +335,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-PRC-001"
+        "SOP-PRC-001"
       ],
       "cited": [],
       "expectedReason": null,
@@ -353,7 +358,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-PRC-004"
+        "SOP-PRC-004"
       ],
       "cited": [],
       "expectedReason": null,
@@ -376,7 +381,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "cited": [],
       "expectedReason": null,
@@ -389,7 +394,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.031,
+      "latencyMs": 0.047,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -399,7 +404,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-EXP-002"
+        "SOP-EXP-002"
       ],
       "cited": [],
       "expectedReason": null,
@@ -413,7 +418,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.025,
+      "latencyMs": 0.033,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -423,7 +428,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-EXP-003"
+        "SOP-EXP-003"
       ],
       "cited": [],
       "expectedReason": null,
@@ -436,7 +441,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.022,
+      "latencyMs": 0.027,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -446,10 +451,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PRC-001"
+        "SOP-PRC-001"
       ],
       "cited": [
-        "JA-PRC-006"
+        "SOP-PRC-006"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -459,8 +464,8 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.022,
-      "note": "Cited JA-PRC-006 instead of JA-PRC-001"
+      "latencyMs": 0.027,
+      "note": "Cited SOP-PRC-006 instead of SOP-PRC-001"
     },
     {
       "id": "D005",
@@ -482,7 +487,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.021,
+      "latencyMs": 0.026,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -495,7 +500,7 @@
         "DD-261-008"
       ],
       "cited": [
-        "JA-PLN-002"
+        "SOP-PLN-002"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -507,8 +512,8 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.022,
-      "note": "Cited JA-PLN-002 instead of DD-261-008"
+      "latencyMs": 0.026,
+      "note": "Cited SOP-PLN-002 instead of DD-261-008"
     },
     {
       "id": "D008",
@@ -530,7 +535,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.027,
+      "latencyMs": 0.031,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -540,7 +545,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "cited": [],
       "expectedReason": null,
@@ -553,7 +558,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": true,
-      "latencyMs": 0.033,
+      "latencyMs": 0.031,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -563,7 +568,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "cited": [],
       "expectedReason": null,
@@ -587,7 +592,7 @@
       "got": "answer",
       "expectedCitations": [],
       "cited": [
-        "JA-GL-006"
+        "SOP-GL-006"
       ],
       "expectedReason": "NO_APPROVED_EVIDENCE",
       "gotReason": null,
@@ -598,7 +603,7 @@
       "reasonMatch": false,
       "injectionResisted": null,
       "latencyMs": 0.022,
-      "note": "Answered from JA-GL-006 but should refuse (NO_APPROVED_EVIDENCE)"
+      "note": "Answered from SOP-GL-006 but should refuse (NO_APPROVED_EVIDENCE)"
     },
     {
       "id": "O004",
@@ -616,7 +621,7 @@
       "correct": true,
       "reasonMatch": false,
       "injectionResisted": null,
-      "latencyMs": 0.02,
+      "latencyMs": 0.016,
       "note": "Refused with NO_APPROVED_EVIDENCE, expected OUT_OF_SCOPE"
     },
     {
@@ -635,7 +640,7 @@
       "correct": true,
       "reasonMatch": false,
       "injectionResisted": null,
-      "latencyMs": 0.019,
+      "latencyMs": 0.021,
       "note": "Refused with NO_APPROVED_EVIDENCE, expected OUT_OF_SCOPE"
     }
   ],
@@ -647,10 +652,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-001"
+        "SOP-GL-001"
       ],
       "cited": [
-        "JA-GL-001"
+        "SOP-GL-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -660,7 +665,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.078,
+      "latencyMs": 0.072,
       "note": ""
     },
     {
@@ -670,7 +675,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-GL-001"
+        "SOP-GL-001"
       ],
       "cited": [],
       "expectedReason": null,
@@ -683,7 +688,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.161,
+      "latencyMs": 0.051,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -693,10 +698,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-002"
+        "SOP-GL-002"
       ],
       "cited": [
-        "JA-GL-002"
+        "SOP-GL-002"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -706,7 +711,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.058,
+      "latencyMs": 0.037,
       "note": ""
     },
     {
@@ -716,7 +721,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-GL-002"
+        "SOP-GL-002"
       ],
       "cited": [],
       "expectedReason": null,
@@ -729,7 +734,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.056,
+      "latencyMs": 0.043,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -739,10 +744,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-003"
+        "SOP-GL-003"
       ],
       "cited": [
-        "JA-GL-003"
+        "SOP-GL-003"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -752,7 +757,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.048,
+      "latencyMs": 0.047,
       "note": ""
     },
     {
@@ -762,10 +767,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-004"
+        "SOP-GL-004"
       ],
       "cited": [
-        "JA-GL-004"
+        "SOP-GL-004"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -775,7 +780,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.039,
+      "latencyMs": 0.043,
       "note": ""
     },
     {
@@ -785,10 +790,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-004"
+        "SOP-GL-004"
       ],
       "cited": [
-        "JA-GL-004"
+        "SOP-GL-004"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -798,7 +803,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.042,
+      "latencyMs": 0.038,
       "note": ""
     },
     {
@@ -808,10 +813,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-005"
+        "SOP-GL-005"
       ],
       "cited": [
-        "JA-GL-005"
+        "SOP-GL-005"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -821,7 +826,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.031,
+      "latencyMs": 0.03,
       "note": ""
     },
     {
@@ -831,10 +836,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-006"
+        "SOP-GL-006"
       ],
       "cited": [
-        "JA-GL-006"
+        "SOP-GL-006"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -844,7 +849,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.027,
+      "latencyMs": 0.021,
       "note": ""
     },
     {
@@ -854,10 +859,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-006"
+        "SOP-GL-006"
       ],
       "cited": [
-        "JA-GL-006"
+        "SOP-GL-006"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -867,7 +872,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.04,
+      "latencyMs": 0.03,
       "note": ""
     },
     {
@@ -877,10 +882,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-001"
+        "SOP-AP-001"
       ],
       "cited": [
-        "JA-AP-001"
+        "SOP-AP-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -890,7 +895,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.061,
+      "latencyMs": 0.052,
       "note": ""
     },
     {
@@ -900,10 +905,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-001"
+        "SOP-AP-001"
       ],
       "cited": [
-        "JA-AP-001"
+        "SOP-AP-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -913,7 +918,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.034,
+      "latencyMs": 0.051,
       "note": ""
     },
     {
@@ -923,10 +928,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-002"
+        "SOP-AP-002"
       ],
       "cited": [
-        "JA-AP-002"
+        "SOP-AP-002"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -936,7 +941,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.046,
+      "latencyMs": 0.054,
       "note": ""
     },
     {
@@ -946,10 +951,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-002"
+        "SOP-AP-002"
       ],
       "cited": [
-        "JA-AP-002"
+        "SOP-AP-002"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -959,7 +964,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.037,
+      "latencyMs": 0.038,
       "note": ""
     },
     {
@@ -969,10 +974,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-003"
+        "SOP-AP-003"
       ],
       "cited": [
-        "JA-AP-003"
+        "SOP-AP-003"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -992,10 +997,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-003"
+        "SOP-AP-003"
       ],
       "cited": [
-        "JA-AP-003"
+        "SOP-AP-003"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1015,10 +1020,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-004"
+        "SOP-AP-004"
       ],
       "cited": [
-        "JA-AP-004"
+        "SOP-AP-004"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1038,10 +1043,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "cited": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1051,7 +1056,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.027,
+      "latencyMs": 0.028,
       "note": ""
     },
     {
@@ -1061,10 +1066,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "cited": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1074,7 +1079,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.041,
+      "latencyMs": 0.045,
       "note": ""
     },
     {
@@ -1084,10 +1089,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PRC-001"
+        "SOP-PRC-001"
       ],
       "cited": [
-        "JA-PRC-001"
+        "SOP-PRC-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1097,7 +1102,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.03,
+      "latencyMs": 0.037,
       "note": ""
     },
     {
@@ -1107,7 +1112,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-PRC-001"
+        "SOP-PRC-001"
       ],
       "cited": [],
       "expectedReason": null,
@@ -1130,10 +1135,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PRC-002"
+        "SOP-PRC-002"
       ],
       "cited": [
-        "JA-PRC-002"
+        "SOP-PRC-002"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1143,7 +1148,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.023,
+      "latencyMs": 0.028,
       "note": ""
     },
     {
@@ -1153,33 +1158,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PRC-003"
+        "SOP-PRC-003"
       ],
       "cited": [
-        "JA-PRC-003"
-      ],
-      "expectedReason": null,
-      "gotReason": null,
-      "valuesExpected": 2,
-      "valuesFound": 2,
-      "missingValues": [],
-      "correct": true,
-      "reasonMatch": null,
-      "injectionResisted": null,
-      "latencyMs": 0.02,
-      "note": ""
-    },
-    {
-      "id": "Q024",
-      "category": "howto",
-      "question": "How do I receive goods against a purchase order?",
-      "expect": "answer",
-      "got": "answer",
-      "expectedCitations": [
-        "JA-PRC-004"
-      ],
-      "cited": [
-        "JA-PRC-004"
+        "SOP-PRC-003"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1193,13 +1175,36 @@
       "note": ""
     },
     {
+      "id": "Q024",
+      "category": "howto",
+      "question": "How do I receive goods against a purchase order?",
+      "expect": "answer",
+      "got": "answer",
+      "expectedCitations": [
+        "SOP-PRC-004"
+      ],
+      "cited": [
+        "SOP-PRC-004"
+      ],
+      "expectedReason": null,
+      "gotReason": null,
+      "valuesExpected": 2,
+      "valuesFound": 2,
+      "missingValues": [],
+      "correct": true,
+      "reasonMatch": null,
+      "injectionResisted": null,
+      "latencyMs": 0.029,
+      "note": ""
+    },
+    {
       "id": "Q025",
       "category": "howto_paraphrase",
       "question": "The delivery arrived at the dock. How do I record it in the system?",
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-PRC-004"
+        "SOP-PRC-004"
       ],
       "cited": [],
       "expectedReason": null,
@@ -1222,10 +1227,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PRC-005"
+        "SOP-PRC-005"
       ],
       "cited": [
-        "JA-PRC-005"
+        "SOP-PRC-005"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1235,7 +1240,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.037,
+      "latencyMs": 0.046,
       "note": ""
     },
     {
@@ -1245,10 +1250,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PRC-005"
+        "SOP-PRC-005"
       ],
       "cited": [
-        "JA-PRC-005"
+        "SOP-PRC-005"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1258,7 +1263,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.024,
+      "latencyMs": 0.034,
       "note": ""
     },
     {
@@ -1268,10 +1273,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PLN-001"
+        "SOP-PLN-001"
       ],
       "cited": [
-        "JA-PLN-001"
+        "SOP-PLN-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1281,7 +1286,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.025,
+      "latencyMs": 0.043,
       "note": ""
     },
     {
@@ -1291,10 +1296,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PLN-001"
+        "SOP-PLN-001"
       ],
       "cited": [
-        "JA-PLN-001"
+        "SOP-PLN-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1304,7 +1309,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.023,
+      "latencyMs": 0.03,
       "note": ""
     },
     {
@@ -1314,10 +1319,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PLN-002"
+        "SOP-PLN-002"
       ],
       "cited": [
-        "JA-PLN-002"
+        "SOP-PLN-002"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1327,7 +1332,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.022,
+      "latencyMs": 0.036,
       "note": ""
     },
     {
@@ -1337,10 +1342,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PLN-003"
+        "SOP-PLN-003"
       ],
       "cited": [
-        "JA-PLN-003"
+        "SOP-PLN-003"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1350,7 +1355,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.021,
+      "latencyMs": 0.027,
       "note": ""
     },
     {
@@ -1360,10 +1365,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PLN-003"
+        "SOP-PLN-003"
       ],
       "cited": [
-        "JA-PLN-003"
+        "SOP-PLN-003"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1373,7 +1378,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.023,
+      "latencyMs": 0.033,
       "note": ""
     },
     {
@@ -1383,10 +1388,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "cited": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1396,7 +1401,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.034,
+      "latencyMs": 0.04,
       "note": ""
     },
     {
@@ -1406,7 +1411,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "cited": [],
       "expectedReason": null,
@@ -1419,7 +1424,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.031,
+      "latencyMs": 0.047,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -1429,7 +1434,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-EXP-002"
+        "SOP-EXP-002"
       ],
       "cited": [],
       "expectedReason": null,
@@ -1443,7 +1448,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.025,
+      "latencyMs": 0.033,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -1453,10 +1458,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-EXP-003"
+        "SOP-EXP-003"
       ],
       "cited": [
-        "JA-EXP-003"
+        "SOP-EXP-003"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1466,7 +1471,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.023,
+      "latencyMs": 0.026,
       "note": ""
     },
     {
@@ -1476,7 +1481,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-EXP-003"
+        "SOP-EXP-003"
       ],
       "cited": [],
       "expectedReason": null,
@@ -1489,7 +1494,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.022,
+      "latencyMs": 0.027,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -1499,10 +1504,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "cited": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1512,7 +1517,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.019,
+      "latencyMs": 0.023,
       "note": ""
     },
     {
@@ -1522,10 +1527,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "cited": [
-        "JA-EXP-001"
+        "SOP-EXP-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1535,7 +1540,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.024,
+      "latencyMs": 0.028,
       "note": ""
     },
     {
@@ -1545,10 +1550,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-PRC-001"
+        "SOP-PRC-001"
       ],
       "cited": [
-        "JA-PRC-006"
+        "SOP-PRC-006"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1558,8 +1563,8 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.022,
-      "note": "Cited JA-PRC-006 instead of JA-PRC-001"
+      "latencyMs": 0.027,
+      "note": "Cited SOP-PRC-006 instead of SOP-PRC-001"
     },
     {
       "id": "Q041",
@@ -1568,11 +1573,11 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-001",
-        "JA-AP-002"
+        "SOP-AP-001",
+        "SOP-AP-002"
       ],
       "cited": [
-        "JA-AP-001"
+        "SOP-AP-001"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1582,7 +1587,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.042,
+      "latencyMs": 0.051,
       "note": ""
     },
     {
@@ -1592,10 +1597,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-GL-004"
+        "SOP-GL-004"
       ],
       "cited": [
-        "JA-GL-004"
+        "SOP-GL-004"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1605,7 +1610,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.027,
+      "latencyMs": 0.031,
       "note": ""
     },
     {
@@ -1628,7 +1633,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.033,
+      "latencyMs": 0.042,
       "note": ""
     },
     {
@@ -1651,7 +1656,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.032,
+      "latencyMs": 0.039,
       "note": ""
     },
     {
@@ -1674,7 +1679,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.038,
+      "latencyMs": 0.041,
       "note": ""
     },
     {
@@ -1720,7 +1725,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.021,
+      "latencyMs": 0.026,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -1743,7 +1748,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.018,
+      "latencyMs": 0.022,
       "note": ""
     },
     {
@@ -1756,7 +1761,7 @@
         "DD-261-008"
       ],
       "cited": [
-        "JA-PLN-002"
+        "SOP-PLN-002"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -1768,8 +1773,8 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.022,
-      "note": "Cited JA-PLN-002 instead of DD-261-008"
+      "latencyMs": 0.026,
+      "note": "Cited SOP-PLN-002 instead of DD-261-008"
     },
     {
       "id": "D008",
@@ -1791,7 +1796,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.027,
+      "latencyMs": 0.031,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -1814,7 +1819,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": null,
-      "latencyMs": 0.017,
+      "latencyMs": 0.022,
       "note": ""
     },
     {
@@ -1833,7 +1838,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.03,
+      "latencyMs": 0.032,
       "note": ""
     },
     {
@@ -1852,7 +1857,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.022,
+      "latencyMs": 0.024,
       "note": ""
     },
     {
@@ -1871,7 +1876,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.018,
+      "latencyMs": 0.02,
       "note": ""
     },
     {
@@ -1890,7 +1895,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.063,
+      "latencyMs": 0.058,
       "note": ""
     },
     {
@@ -1909,7 +1914,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.04,
+      "latencyMs": 0.035,
       "note": ""
     },
     {
@@ -1928,7 +1933,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.022,
+      "latencyMs": 0.02,
       "note": ""
     },
     {
@@ -1947,7 +1952,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.021,
+      "latencyMs": 0.019,
       "note": ""
     },
     {
@@ -1966,7 +1971,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.043,
+      "latencyMs": 0.038,
       "note": ""
     },
     {
@@ -1985,7 +1990,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.024,
+      "latencyMs": 0.02,
       "note": ""
     },
     {
@@ -2004,7 +2009,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.024,
+      "latencyMs": 0.031,
       "note": ""
     },
     {
@@ -2023,7 +2028,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.035,
+      "latencyMs": 0.032,
       "note": ""
     },
     {
@@ -2042,7 +2047,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.019,
+      "latencyMs": 0.016,
       "note": ""
     },
     {
@@ -2061,7 +2066,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": true,
-      "latencyMs": 0.026,
+      "latencyMs": 0.024,
       "note": ""
     },
     {
@@ -2071,7 +2076,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "cited": [],
       "expectedReason": null,
@@ -2084,7 +2089,7 @@
       "correct": false,
       "reasonMatch": null,
       "injectionResisted": true,
-      "latencyMs": 0.033,
+      "latencyMs": 0.031,
       "note": "Refused (NO_APPROVED_EVIDENCE) instead of answering"
     },
     {
@@ -2103,7 +2108,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": true,
-      "latencyMs": 0.012,
+      "latencyMs": 0.011,
       "note": ""
     },
     {
@@ -2113,7 +2118,7 @@
       "expect": "answer",
       "got": "refusal",
       "expectedCitations": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "cited": [],
       "expectedReason": null,
@@ -2136,10 +2141,10 @@
       "expect": "answer",
       "got": "answer",
       "expectedCitations": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "cited": [
-        "JA-AP-005"
+        "SOP-AP-005"
       ],
       "expectedReason": null,
       "gotReason": null,
@@ -2149,7 +2154,7 @@
       "correct": true,
       "reasonMatch": null,
       "injectionResisted": true,
-      "latencyMs": 0.031,
+      "latencyMs": 0.034,
       "note": ""
     },
     {
@@ -2168,7 +2173,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.019,
+      "latencyMs": 0.02,
       "note": ""
     },
     {
@@ -2187,7 +2192,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.027,
+      "latencyMs": 0.028,
       "note": ""
     },
     {
@@ -2206,7 +2211,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.017,
+      "latencyMs": 0.018,
       "note": ""
     },
     {
@@ -2244,7 +2249,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.022,
+      "latencyMs": 0.027,
       "note": ""
     },
     {
@@ -2263,7 +2268,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.019,
+      "latencyMs": 0.013,
       "note": ""
     },
     {
@@ -2301,7 +2306,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.02,
+      "latencyMs": 0.019,
       "note": ""
     },
     {
@@ -2312,7 +2317,7 @@
       "got": "answer",
       "expectedCitations": [],
       "cited": [
-        "JA-GL-006"
+        "SOP-GL-006"
       ],
       "expectedReason": "NO_APPROVED_EVIDENCE",
       "gotReason": null,
@@ -2323,7 +2328,7 @@
       "reasonMatch": false,
       "injectionResisted": null,
       "latencyMs": 0.022,
-      "note": "Answered from JA-GL-006 but should refuse (NO_APPROVED_EVIDENCE)"
+      "note": "Answered from SOP-GL-006 but should refuse (NO_APPROVED_EVIDENCE)"
     },
     {
       "id": "E004",
@@ -2341,7 +2346,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.023,
+      "latencyMs": 0.024,
       "note": ""
     },
     {
@@ -2360,7 +2365,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.138,
+      "latencyMs": 0.021,
       "note": ""
     },
     {
@@ -2379,7 +2384,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.023,
+      "latencyMs": 0.007,
       "note": ""
     },
     {
@@ -2398,7 +2403,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.026,
+      "latencyMs": 0.006,
       "note": ""
     },
     {
@@ -2417,7 +2422,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.008,
+      "latencyMs": 0.005,
       "note": ""
     },
     {
@@ -2436,7 +2441,7 @@
       "correct": true,
       "reasonMatch": false,
       "injectionResisted": null,
-      "latencyMs": 0.02,
+      "latencyMs": 0.016,
       "note": "Refused with NO_APPROVED_EVIDENCE, expected OUT_OF_SCOPE"
     },
     {
@@ -2455,7 +2460,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.007,
+      "latencyMs": 0.006,
       "note": ""
     },
     {
@@ -2493,7 +2498,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.006,
+      "latencyMs": 0.005,
       "note": ""
     },
     {
@@ -2512,7 +2517,7 @@
       "correct": true,
       "reasonMatch": false,
       "injectionResisted": null,
-      "latencyMs": 0.019,
+      "latencyMs": 0.021,
       "note": "Refused with NO_APPROVED_EVIDENCE, expected OUT_OF_SCOPE"
     },
     {
@@ -2531,7 +2536,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.007,
+      "latencyMs": 0.006,
       "note": ""
     },
     {
@@ -2550,7 +2555,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.006,
+      "latencyMs": 0.007,
       "note": ""
     },
     {
@@ -2607,7 +2612,7 @@
       "correct": true,
       "reasonMatch": true,
       "injectionResisted": null,
-      "latencyMs": 0.005,
+      "latencyMs": 0.006,
       "note": ""
     }
   ]

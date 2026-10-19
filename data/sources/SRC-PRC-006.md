@@ -10,7 +10,7 @@ captured_on: 2026-09-24
 
 ## Purpose
 
-Use this job aid when you need to buy something and must raise a request first.
+Use this SOP when you need to buy something and must raise a request first.
 
 ## Steps
 

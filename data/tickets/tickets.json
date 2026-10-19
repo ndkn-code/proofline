@@ -349,7 +349,7 @@
     "opened_on": "2026-05-12",
     "subject": "Upload journal from spreadsheet",
     "description": "User wants to upload 400 journal lines.",
-    "resolution": "No approved job aid for spreadsheet upload. Escalated to GL team."
+    "resolution": "No approved SOP for spreadsheet upload. Escalated to GL team."
   },
   {
     "id": "TCK-0045",
@@ -405,7 +405,7 @@
     "opened_on": "2026-06-03",
     "subject": "Card reconcile deadline",
     "description": "How long do I have to reconcile card charges.",
-    "resolution": "Pointed user to the corporate card job aid."
+    "resolution": "Pointed user to the corporate card SOP."
   },
   {
     "id": "TCK-0052",
@@ -413,7 +413,7 @@
     "opened_on": "2026-06-08",
     "subject": "Second approver for non-PO invoice",
     "description": "Unclear threshold for second approver.",
-    "resolution": "Two job aids state different thresholds. Escalated to AP supervisor for a ruling."
+    "resolution": "Two SOPs state different thresholds. Escalated to AP supervisor for a ruling."
   },
   {
     "id": "TCK-0053",
@@ -421,7 +421,7 @@
     "opened_on": "2026-06-10",
     "subject": "Cycle lock time",
     "description": "When does the planning cycle lock.",
-    "resolution": "Two job aids disagree on the lock day. Escalated to FP&A Systems."
+    "resolution": "Two SOPs disagree on the lock day. Escalated to FP&A Systems."
   },
   {
     "id": "TCK-0054",

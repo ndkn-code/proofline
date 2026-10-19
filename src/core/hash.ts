@@ -5,6 +5,11 @@ export function sha256(text: string): string {
   return createHash("sha256").update(text, "utf8").digest("hex");
 }
 
+/** SHA-256 of raw bytes. Every SOP PDF version is identified by the hash of its exact bytes. */
+export function sha256Bytes(bytes: Uint8Array): string {
+  return createHash("sha256").update(bytes).digest("hex");
+}
+
 /** Stable JSON serialization (sorted keys) so hashes of records are reproducible. */
 export function canonicalJson(value: unknown): string {
   if (value === null || typeof value !== "object") return JSON.stringify(value);

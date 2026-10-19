@@ -10,7 +10,7 @@ captured_on: 2026-08-29
 
 ## Purpose
 
-Use this job aid to choose the bank account your expense reimbursements are paid to.
+Use this SOP to choose the bank account your expense reimbursements are paid to.
 
 ## Steps
 
